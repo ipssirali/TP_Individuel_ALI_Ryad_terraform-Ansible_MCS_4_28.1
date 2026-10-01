@@ -1,0 +1,4 @@
+# Copier ce fichier en terraform.tfvars et renseigner les vraies valeurs.
+# terraform.tfvars est ignoré par git : ne jamais le versionner.
+admin_cidr  = "x.x.x.x/32"
+db_password = "CHANGER_MOI"

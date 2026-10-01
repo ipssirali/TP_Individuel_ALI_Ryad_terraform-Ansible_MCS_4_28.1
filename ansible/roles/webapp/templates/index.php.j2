@@ -1,0 +1,31 @@
+<?php
+// Géré par Ansible. Page de test : identité de l'instance et état réel de
+// la connexion à la base. Le mot de passe n'est jamais affiché, et le message
+// d'erreur brut non plus (il pourrait contenir l'hôte ou le compte).
+$cfg = require '{{ webapp_config_dir }}/db.php';
+$status = 'ECHEC';
+$detail = '';
+try {
+    $dsn = sprintf('pgsql:host=%s;port=%d;dbname=%s;connect_timeout=5',
+        $cfg['host'], $cfg['port'], $cfg['name']);
+    $pdo = new PDO($dsn, $cfg['user'], $cfg['password'],
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $detail = (string) $pdo->query('select version()')->fetchColumn();
+    $status = 'OK';
+} catch (Throwable $e) {
+    $detail = 'erreur de type ' . get_class($e);
+}
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>AtlasBook - page de test</title></head>
+<body>
+  <h1>AtlasBook - LocAuto Solutions</h1>
+  <p>Hostname : {{ ansible_facts['hostname'] }}</p>
+  <p>IP privée : {{ ansible_facts['default_ipv4']['address'] }}</p>
+  <p>Zone de disponibilité : {{ placement['availability_zone'] | default('inconnue') }}</p>
+  <p>Endpoint RDS : {{ webapp_db_host }}</p>
+  <p>Connexion RDS : <?= htmlspecialchars($status) ?></p>
+  <p>Détail : <?= htmlspecialchars($detail) ?></p>
+</body>
+</html>

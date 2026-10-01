@@ -1,0 +1,18 @@
+---
+# Rebond SSH automatique par le bastion. Le bastion est retrouvé dans
+# l'inventaire par son tag Role, donc son IP publique n'est jamais écrite en
+# dur. ProxyCommand plutôt que ProxyJump pour pouvoir passer les options de
+# clé d'hôte au saut intermédiaire, ce que ProxyJump ne propage pas.
+ansible_ssh_common_args: >-
+  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+  -o ProxyCommand="ssh -W %h:%p -q -o StrictHostKeyChecking=no
+  -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_ed25519
+  ubuntu@{{ hostvars[groups['role_bastion'][0]]['public_ip_address'] }}"
+
+# Paramètres de connexion à la base pour le rôle webapp. Le mot de passe est
+# l'unique valeur secrète : il vient du coffre chiffré (vault.yml).
+webapp_db_host: "{{ rds_host }}"
+webapp_db_port: 5432
+webapp_db_name: "{{ db_name }}"
+webapp_db_user: "{{ db_user }}"
+webapp_db_password: "{{ vault_db_password }}"

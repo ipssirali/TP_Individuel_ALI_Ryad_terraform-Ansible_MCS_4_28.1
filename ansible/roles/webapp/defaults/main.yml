@@ -1,0 +1,17 @@
+---
+# Version de PHP fournie par Ubuntu 22.04 : elle détermine le nom du socket
+# PHP-FPM utilisé par nginx.
+webapp_php_version: "8.1"
+
+webapp_docroot: /var/www/atlasbook
+
+# Répertoire de la configuration applicative qui contient le secret. Il est
+# lisible par root et par le groupe du serveur web, mais par personne d'autre.
+webapp_config_dir: /etc/atlasbook
+webapp_web_group: www-data
+
+webapp_packages:
+  - nginx
+  - php-fpm
+  - php-pgsql
+  - postgresql-client

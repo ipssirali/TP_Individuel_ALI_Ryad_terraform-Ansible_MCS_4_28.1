@@ -1,0 +1,46 @@
+---
+# Socle appliqué avant tout rôle applicatif : état du système, outils,
+# heure et sécurité d'accès. Il est séparé de webapp pour pouvoir être
+# réutilisé tel quel sur n'importe quel autre type d'instance.
+
+# lock_timeout : au premier démarrage, cloud-init ou unattended-upgrades peut
+# détenir le verrou apt. On attend plutôt que d'échouer.
+- name: Mettre à jour le cache des paquets
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    lock_timeout: 180
+
+- name: Installer les outils de base
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: present
+    lock_timeout: 180
+
+# Des horodatages cohérents dans les journaux de toutes les instances.
+- name: Régler le fuseau horaire
+  community.general.timezone:
+    name: "{{ common_timezone }}"
+
+# validate : sshd -t contrôle la syntaxe du fichier AVANT qu'il soit remplacé,
+# ce qui évite de se retrouver enfermé dehors avec une configuration invalide.
+# Les directives des fichiers de sshd_config.d (inclus en tête) restent
+# prioritaires : cette étape garantit surtout la cohérence du fichier principal.
+- name: Appliquer le durcissement SSH minimal
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    mode: "0644"
+    validate: /usr/sbin/sshd -t -f %s
+  loop: "{{ common_ssh_settings }}"
+  notify: Recharger sshd
+
+# Bannière qui rappelle le rôle de la machine à toute personne qui s'y connecte.
+- name: Déployer la bannière de connexion
+  ansible.builtin.template:
+    src: motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: "0644"

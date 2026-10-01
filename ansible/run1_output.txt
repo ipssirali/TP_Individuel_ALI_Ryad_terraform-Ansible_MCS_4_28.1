@@ -1,0 +1,103 @@
+
+PLAY [Configurer les instances applicatives AtlasBook] *************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.10.11.54]
+ok: [10.10.12.123]
+
+TASK [common : Mettre à jour le cache des paquets] *****************************
+changed: [10.10.11.54]
+changed: [10.10.12.123]
+
+TASK [common : Installer les outils de base] ***********************************
+changed: [10.10.11.54]
+changed: [10.10.12.123]
+
+TASK [common : Régler le fuseau horaire] ***************************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [common : Appliquer le durcissement SSH minimal] **************************
+changed: [10.10.11.54] => (item={'regexp': '^\\s*#?\\s*PermitRootLogin\\b', 'line': 'PermitRootLogin no'})
+changed: [10.10.12.123] => (item={'regexp': '^\\s*#?\\s*PermitRootLogin\\b', 'line': 'PermitRootLogin no'})
+changed: [10.10.11.54] => (item={'regexp': '^\\s*#?\\s*PasswordAuthentication\\b', 'line': 'PasswordAuthentication no'})
+changed: [10.10.12.123] => (item={'regexp': '^\\s*#?\\s*PasswordAuthentication\\b', 'line': 'PasswordAuthentication no'})
+
+TASK [common : Déployer la bannière de connexion] ******************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Installer nginx, PHP-FPM et le pilote PostgreSQL] ***************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Activer et démarrer PHP-FPM] ************************************
+ok: [10.10.12.123]
+ok: [10.10.11.54]
+
+TASK [webapp : Activer et démarrer nginx] **************************************
+ok: [10.10.12.123]
+ok: [10.10.11.54]
+
+TASK [webapp : Créer le répertoire de configuration applicative] ***************
+changed: [10.10.11.54]
+changed: [10.10.12.123]
+
+TASK [webapp : Déployer la configuration d'accès à la base] ********************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Créer le répertoire du site] ************************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Déployer la page de test] ***************************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Retirer le site d'amorçage] *************************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Déployer le vhost de l'application] *****************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+TASK [webapp : Activer le vhost de l'application] ******************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+RUNNING HANDLER [common : Recharger sshd] **************************************
+changed: [10.10.12.123]
+changed: [10.10.11.54]
+
+RUNNING HANDLER [webapp : Recharger nginx] *************************************
+changed: [10.10.11.54]
+changed: [10.10.12.123]
+
+TASK [Vérifier que le point de health check répond] ****************************
+ok: [10.10.12.123]
+ok: [10.10.11.54]
+
+TASK [Récupérer la page de test] ***********************************************
+ok: [10.10.11.54]
+ok: [10.10.12.123]
+
+TASK [Contrôler le contenu de /health et de la page de test] *******************
+ok: [10.10.12.123] => {
+    "changed": false,
+    "msg": "Site, health check et connexion RDS conformes"
+}
+ok: [10.10.11.54] => {
+    "changed": false,
+    "msg": "Site, health check et connexion RDS conformes"
+}
+
+TASK [Vérifier que le mot de passe n'est pas exposé dans la page] **************
+ok: [10.10.12.123]
+ok: [10.10.11.54]
+
+PLAY RECAP *********************************************************************
+10.10.11.54                : ok=22   changed=15   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+10.10.12.123               : ok=22   changed=15   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,85 @@
+---
+# Couche applicative : serveur web, runtime PHP, accès à la base et page de
+# test. Remplace le site d'amorçage posé par le user_data de Terraform.
+
+- name: Installer nginx, PHP-FPM et le pilote PostgreSQL
+  ansible.builtin.apt:
+    name: "{{ webapp_packages }}"
+    state: present
+    lock_timeout: 180
+
+# Démarré et activé au boot : une instance remplacée par l'ASG doit servir
+# sans intervention dès que sa configuration a été appliquée.
+- name: Activer et démarrer PHP-FPM
+  ansible.builtin.service:
+    name: "php{{ webapp_php_version }}-fpm"
+    state: started
+    enabled: true
+
+- name: Activer et démarrer nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Créer le répertoire de configuration applicative
+  ansible.builtin.file:
+    path: "{{ webapp_config_dir }}"
+    state: directory
+    owner: root
+    group: "{{ webapp_web_group }}"
+    mode: "0750"
+
+# Le secret de la base n'est écrit que dans ce fichier, en 0640 root:www-data :
+# PHP-FPM peut le lire, aucun autre compte du système ne le peut. no_log
+# empêche Ansible d'afficher le mot de passe dans ses sorties et journaux.
+- name: Déployer la configuration d'accès à la base
+  ansible.builtin.template:
+    src: db_config.php.j2
+    dest: "{{ webapp_config_dir }}/db.php"
+    owner: root
+    group: "{{ webapp_web_group }}"
+    mode: "0640"
+  no_log: true
+
+- name: Créer le répertoire du site
+  ansible.builtin.file:
+    path: "{{ webapp_docroot }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+# Page de test : affiche les facts de l'instance et le résultat d'une vraie
+# connexion à RDS, sans jamais exposer le mot de passe.
+- name: Déployer la page de test
+  ansible.builtin.template:
+    src: index.php.j2
+    dest: "{{ webapp_docroot }}/index.php"
+    owner: root
+    group: root
+    mode: "0644"
+
+# Le site d'amorçage (sites-enabled/default) est retiré pour qu'un seul vhost
+# réponde, sinon deux blocs default_server entreraient en conflit.
+- name: Retirer le site d'amorçage
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Recharger nginx
+
+- name: Déployer le vhost de l'application
+  ansible.builtin.template:
+    src: vhost.conf.j2
+    dest: /etc/nginx/sites-available/atlasbook.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Recharger nginx
+
+- name: Activer le vhost de l'application
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/atlasbook.conf
+    dest: /etc/nginx/sites-enabled/atlasbook.conf
+    state: link
+  notify: Recharger nginx

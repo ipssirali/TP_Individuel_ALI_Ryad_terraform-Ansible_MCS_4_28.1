@@ -1,0 +1,33 @@
+---
+# Inventaire dynamique : interroge l'API EC2 au moment de l'exécution, donc
+# il suit automatiquement les créations, remplacements et suppressions
+# d'instances décidés par l'Auto Scaling Group, sans qu'on touche à ce fichier.
+plugin: amazon.aws.aws_ec2
+
+regions:
+  - us-east-1
+
+# On ne garde que les instances de ce projet et en fonctionnement : le tag
+# Project est posé par Terraform, et filtrer l'état évite de cibler des
+# instances en cours d'arrêt ou de remplacement.
+filters:
+  tag:Project: atlasbook
+  instance-state-name: running
+
+# Les instances applicatives n'ont pas d'IP publique : on les identifie et on
+# s'y connecte par leur IP privée, atteinte via le bastion.
+hostnames:
+  - private-ip-address
+
+compose:
+  ansible_host: private_ip_address
+
+# Groupes créés à partir des tags et de la zone : role_app, role_bastion,
+# az_us_east_1a... Le playbook cible role_app, sans lister aucune machine.
+keyed_groups:
+  - key: ec2_tags.Role
+    prefix: role
+    separator: "_"
+  - key: placement.availability_zone
+    prefix: az
+    separator: "_"

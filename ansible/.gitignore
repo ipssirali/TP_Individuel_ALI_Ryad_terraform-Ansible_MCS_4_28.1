@@ -1,0 +1,6 @@
+*.retry
+*.log
+# Le mot de passe du coffre ne doit jamais entrer dans le dépôt (il est déjà
+# stocké hors du dossier, dans ~/.ansible, ces lignes sont une sécurité de plus).
+.vault_pass*
+*vault_pass*

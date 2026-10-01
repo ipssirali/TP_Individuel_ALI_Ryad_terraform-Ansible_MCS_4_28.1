@@ -1,0 +1,6 @@
+---
+# Variables communes, sans aucune valeur secrète.
+# L'endpoint RDS, le nom de base et le compte ne sont PAS écrits ici : ils
+# viennent de Terraform et sont passés par run.sh (rds_host, db_name, db_user),
+# pour ne jamais recopier une adresse à la main.
+project_name: atlasbook

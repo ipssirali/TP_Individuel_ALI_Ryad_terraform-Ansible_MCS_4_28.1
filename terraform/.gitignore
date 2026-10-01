@@ -1,0 +1,15 @@
+# State : contient l'inventaire complet de l'infra et, pour RDS, le mot de passe
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+# Valeurs réelles (secrets) : seul l'exemple est versionné
+*.tfvars
+!terraform.tfvars.example
+# Clés et identifiants
+*.pem
+*.key
+id_*
+!*.pub
+credentials
+.env

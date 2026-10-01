@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------
+# .gitignore racine : filet de sécurité pour tout le projet.
+# Terraform et Ansible ont leur propre .gitignore ; celui-ci protège aussi
+# les fichiers placés ailleurs par erreur.
+# ---------------------------------------------------------------------------
+
+# --- Terraform : état et dépendances ---------------------------------------
+# Le state contient l'inventaire complet de l'infrastructure et, pour RDS,
+# le mot de passe administrateur en clair.
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# --- Secrets ---------------------------------------------------------------
+# Valeurs réelles des variables (mot de passe RDS, IP d'administration).
+# Seul le fichier d'exemple, sans valeur réelle, est versionné.
+*.tfvars
+*.tfvars.json
+!terraform.tfvars.example
+
+# Mot de passe du coffre Ansible Vault (il vit normalement dans ~/.ansible,
+# hors du dépôt : ces lignes sont une sécurité supplémentaire).
+.vault_pass*
+*vault_pass*
+*.vault_password
+
+# Clés privées et identifiants
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_ecdsa
+credentials
+.aws/
+.env
+.env.*
+
+# --- Fichiers générés ou de travail ------------------------------------------
+*.retry
+*.log
+__pycache__/
+rapport.html
+.ansible/
+
+# --- Sources du rapport -------------------------------------------------------
+# Le rendu contient rapport.pdf et schema.png. Les sources de rédaction
+# (Markdown, script de génération, captures déjà intégrées au PDF) restent
+# en local. Pour les versionner aussi, supprimer ces quatre lignes.
+rapport.md
+build_rapport.sh
+captures/
+*.zip

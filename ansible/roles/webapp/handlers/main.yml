@@ -1,0 +1,8 @@
+---
+# nginx n'est rechargé que si un fichier de configuration a réellement changé :
+# c'est ce qui rend le playbook idempotent (aucun rechargement inutile au
+# second passage, donc changed=0).
+- name: Recharger nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded

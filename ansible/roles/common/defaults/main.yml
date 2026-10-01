@@ -1,0 +1,19 @@
+---
+# Socle commun à toute instance. Valeurs modifiables sans toucher aux tâches.
+common_timezone: Europe/Paris
+
+common_packages:
+  - curl
+  - vim
+  - htop
+  - unzip
+  - jq
+
+# Durcissement SSH minimal : plus de connexion root ni par mot de passe, donc
+# seules les clés sont acceptées. regexp couvre aussi la version commentée de
+# la directive pour la remplacer au lieu d'en ajouter une seconde.
+common_ssh_settings:
+  - regexp: '^\s*#?\s*PermitRootLogin\b'
+    line: PermitRootLogin no
+  - regexp: '^\s*#?\s*PasswordAuthentication\b'
+    line: PasswordAuthentication no

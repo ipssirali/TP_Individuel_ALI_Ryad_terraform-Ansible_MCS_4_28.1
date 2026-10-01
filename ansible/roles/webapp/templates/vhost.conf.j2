@@ -1,0 +1,31 @@
+# Géré par Ansible. Vhost unique de l'application AtlasBook.
+server {
+    listen 80 default_server;
+    server_name _;
+
+    root {{ webapp_docroot }};
+    index index.php;
+
+    # Chemin interrogé par le health check du Target Group : il répond 200
+    # sans passer par PHP ni par la base, pour qu'une panne de RDS ne fasse
+    # pas retirer toutes les instances du service.
+    location = /health {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php{{ webapp_php_version }}-fpm.sock;
+    }
+
+    # Aucun fichier caché (.git, .env...) ne doit être servi.
+    location ~ /\. {
+        deny all;
+    }
+}

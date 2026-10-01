@@ -1,0 +1,7 @@
+---
+# Rechargé (et non redémarré) : les sessions SSH ouvertes, dont celle
+# d'Ansible, ne sont pas coupées. Déclenché uniquement si sshd_config a changé.
+- name: Recharger sshd
+  ansible.builtin.service:
+    name: ssh
+    state: reloaded

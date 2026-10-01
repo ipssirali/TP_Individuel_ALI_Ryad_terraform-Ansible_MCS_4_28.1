@@ -1,0 +1,1425 @@
+data.aws_caller_identity.current: Reading...
+data.aws_availability_zones.available: Reading...
+data.aws_ami.ubuntu: Reading...
+data.aws_caller_identity.current: Read complete after 0s [id=212845664736]
+data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+data.aws_ami.ubuntu: Read complete after 1s [id=ami-062944a84867f2386]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.app will be created
+  + resource "aws_autoscaling_group" "app" {
+      + arn                              = (known after apply)
+      + availability_zones               = (known after apply)
+      + default_cooldown                 = (known after apply)
+      + desired_capacity                 = 2
+      + force_delete                     = false
+      + force_delete_warm_pool           = false
+      + health_check_grace_period        = 300
+      + health_check_type                = "ELB"
+      + id                               = (known after apply)
+      + ignore_failed_scaling_activities = false
+      + load_balancers                   = (known after apply)
+      + max_size                         = 3
+      + metrics_granularity              = "1Minute"
+      + min_size                         = 2
+      + name                             = "atlasbook-asg"
+      + name_prefix                      = (known after apply)
+      + predicted_capacity               = (known after apply)
+      + protect_from_scale_in            = false
+      + service_linked_role_arn          = (known after apply)
+      + target_group_arns                = (known after apply)
+      + vpc_zone_identifier              = (known after apply)
+      + wait_for_capacity_timeout        = "10m"
+      + warm_pool_size                   = (known after apply)
+
+      + availability_zone_distribution (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + launch_template {
+          + id      = (known after apply)
+          + name    = (known after apply)
+          + version = "$Latest"
+        }
+
+      + mixed_instances_policy (known after apply)
+
+      + tag {
+          + key                 = "Name"
+          + propagate_at_launch = true
+          + value               = "atlasbook-app"
+        }
+      + tag {
+          + key                 = "Project"
+          + propagate_at_launch = true
+          + value               = "atlasbook"
+        }
+      + tag {
+          + key                 = "Role"
+          + propagate_at_launch = true
+          + value               = "app"
+        }
+
+      + traffic_source (known after apply)
+    }
+
+  # aws_db_instance.main will be created
+  + resource "aws_db_instance" "main" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 20
+      + apply_immediately                     = false
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = "us-east-1a"
+      + backup_retention_period               = (known after apply)
+      + backup_target                         = (known after apply)
+      + backup_window                         = (known after apply)
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = false
+      + database_insights_mode                = (known after apply)
+      + db_name                               = "atlasbook"
+      + db_subnet_group_name                  = "atlasbook-db-subnets"
+      + dedicated_log_volume                  = false
+      + delete_automated_backups              = true
+      + domain_fqdn                           = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "postgres"
+      + engine_lifecycle_support              = (known after apply)
+      + engine_version                        = "16.15"
+      + engine_version_actual                 = (known after apply)
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = "atlasbook-db"
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t3.micro"
+      + iops                                  = (known after apply)
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + listener_endpoint                     = (known after apply)
+      + maintenance_window                    = (known after apply)
+      + master_user_secret                    = (known after apply)
+      + master_user_secret_kms_key_id         = (known after apply)
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = false
+      + nchar_character_set_name              = (known after apply)
+      + network_type                          = (known after apply)
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = (known after apply)
+      + password                              = (sensitive value)
+      + password_wo                           = (write-only attribute)
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = (known after apply)
+      + publicly_accessible                   = false
+      + replica_mode                          = (known after apply)
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_encrypted                     = true
+      + storage_throughput                    = (known after apply)
+      + storage_type                          = (known after apply)
+      + tags                                  = {
+          + "Name" = "atlasbook-db"
+        }
+      + tags_all                              = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-db"
+          + "Project"   = "atlasbook"
+        }
+      + timezone                              = (known after apply)
+      + username                              = "atlas_admin"
+      + vpc_security_group_ids                = (known after apply)
+    }
+
+  # aws_db_subnet_group.main will be created
+  + resource "aws_db_subnet_group" "main" {
+      + arn                     = (known after apply)
+      + description             = "Managed by Terraform"
+      + id                      = (known after apply)
+      + name                    = "atlasbook-db-subnets"
+      + name_prefix             = (known after apply)
+      + subnet_ids              = (known after apply)
+      + supported_network_types = (known after apply)
+      + tags                    = {
+          + "Name" = "atlasbook-db-subnets"
+        }
+      + tags_all                = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-db-subnets"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                  = (known after apply)
+    }
+
+  # aws_eip.nat will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + arn                  = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + ipam_pool_id         = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + ptr_record           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Name" = "atlasbook-nat-eip"
+        }
+      + tags_all             = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-nat-eip"
+          + "Project"   = "atlasbook"
+        }
+      + vpc                  = (known after apply)
+    }
+
+  # aws_instance.bastion will be created
+  + resource "aws_instance" "bastion" {
+      + ami                                  = "ami-062944a84867f2386"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = true
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t3.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tp-ryad-galaktus-key"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "atlasbook-bastion"
+          + "Role" = "bastion"
+        }
+      + tags_all                             = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-bastion"
+          + "Project"   = "atlasbook"
+          + "Role"      = "bastion"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options {
+          + http_endpoint               = "enabled"
+          + http_protocol_ipv6          = "disabled"
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = "required"
+          + instance_metadata_tags      = (known after apply)
+        }
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # aws_internet_gateway.main will be created
+  + resource "aws_internet_gateway" "main" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Name" = "atlasbook-igw"
+        }
+      + tags_all = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-igw"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_launch_template.app will be created
+  + resource "aws_launch_template" "app" {
+      + arn                    = (known after apply)
+      + default_version        = (known after apply)
+      + id                     = (known after apply)
+      + image_id               = "ami-062944a84867f2386"
+      + instance_type          = "t3.micro"
+      + key_name               = "tp-ryad-galaktus-key"
+      + latest_version         = (known after apply)
+      + name                   = (known after apply)
+      + name_prefix            = "atlasbook-app-"
+      + tags_all               = {
+          + "ManagedBy" = "terraform"
+          + "Project"   = "atlasbook"
+        }
+      + user_data              = "IyEvYmluL2Jhc2gKIyBBbW9yw6dhZ2UgbWluaW1hbCBleMOpY3V0w6kgcGFyIGNsb3VkLWluaXQgYXUgcHJlbWllciBkw6ltYXJyYWdlLgojIE9iamVjdGlmIDogcXVlIGwnaW5zdGFuY2UgcsOpcG9uZGUgMjAwIHN1ciAvaGVhbHRoIGTDqHMgcXVlIHBvc3NpYmxlLCBwb3VyCiMgcGFzc2VyICJoZWFsdGh5IiBkYW5zIGxlIFRhcmdldCBHcm91cCBhdmFudCBsZSBwYXNzYWdlIGQnQW5zaWJsZS4KIyBMYSBjb25maWd1cmF0aW9uIGFwcGxpY2F0aXZlIHLDqWVsbGUgKHZob3N0LCBQSFAsIGFjY8OocyBiYXNlKSBlc3QgZmFpdGUgcGFyCiMgQW5zaWJsZSwgcXVpIHJlbXBsYWNlIGNlIHNpdGUgcGFyIGTDqWZhdXQuCnNldCAtZXVvIHBpcGVmYWlsCgpleHBvcnQgREVCSUFOX0ZST05URU5EPW5vbmludGVyYWN0aXZlCmFwdC1nZXQgdXBkYXRlIC15CmFwdC1nZXQgaW5zdGFsbCAteSBuZ2lueAoKIyBTaXRlIHBhciBkw6lmYXV0IHZvbG9udGFpcmVtZW50IHRyaXZpYWwgOiAvaGVhbHRoIHBvdXIgbCdBTEIsIGV0IHVuZSBwYWdlCiMgcXVpIGluZGlxdWUgcXVlIGwnaW5zdGFuY2Ugbidlc3QgcGFzIGVuY29yZSBjb25maWd1csOpZS4KY2F0ID4gL2V0Yy9uZ2lueC9zaXRlcy1hdmFpbGFibGUvZGVmYXVsdCA8PCdOR0lOWCcKc2VydmVyIHsKICAgIGxpc3RlbiA4MCBkZWZhdWx0X3NlcnZlcjsKICAgIHNlcnZlcl9uYW1lIF87CgogICAgbG9jYXRpb24gL2hlYWx0aCB7CiAgICAgICAgZGVmYXVsdF90eXBlIHRleHQvcGxhaW47CiAgICAgICAgcmV0dXJuIDIwMCAib2tcbiI7CiAgICB9CgogICAgbG9jYXRpb24gLyB7CiAgICAgICAgZGVmYXVsdF90eXBlIHRleHQvcGxhaW47CiAgICAgICAgcmV0dXJuIDIwMCAiaW5zdGFuY2UgYW1vcmNlZSwgY29uZmlndXJhdGlvbiBBbnNpYmxlIGVuIGF0dGVudGVcbiI7CiAgICB9Cn0KTkdJTlgKCnN5c3RlbWN0bCBlbmFibGUgbmdpbngKc3lzdGVtY3RsIHJlc3RhcnQgbmdpbngK"
+      + vpc_security_group_ids = (known after apply)
+
+      + iam_instance_profile {
+          + name = "LabInstanceProfile"
+        }
+
+      + metadata_options {
+          + http_endpoint               = "enabled"
+          + http_protocol_ipv6          = (known after apply)
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = "required"
+          + instance_metadata_tags      = (known after apply)
+        }
+    }
+
+  # aws_lb.app will be created
+  + resource "aws_lb" "app" {
+      + arn                                                          = (known after apply)
+      + arn_suffix                                                   = (known after apply)
+      + client_keep_alive                                            = 3600
+      + desync_mitigation_mode                                       = "defensive"
+      + dns_name                                                     = (known after apply)
+      + drop_invalid_header_fields                                   = false
+      + enable_deletion_protection                                   = false
+      + enable_http2                                                 = true
+      + enable_tls_version_and_cipher_suite_headers                  = false
+      + enable_waf_fail_open                                         = false
+      + enable_xff_client_port                                       = false
+      + enable_zonal_shift                                           = false
+      + enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      + id                                                           = (known after apply)
+      + idle_timeout                                                 = 60
+      + internal                                                     = false
+      + ip_address_type                                              = (known after apply)
+      + load_balancer_type                                           = "application"
+      + name                                                         = "atlasbook-alb"
+      + name_prefix                                                  = (known after apply)
+      + preserve_host_header                                         = false
+      + security_groups                                              = (known after apply)
+      + subnets                                                      = (known after apply)
+      + tags                                                         = {
+          + "Name" = "atlasbook-alb"
+        }
+      + tags_all                                                     = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-alb"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                                                       = (known after apply)
+      + xff_header_processing_mode                                   = "append"
+      + zone_id                                                      = (known after apply)
+
+      + subnet_mapping (known after apply)
+    }
+
+  # aws_lb_listener.http will be created
+  + resource "aws_lb_listener" "http" {
+      + arn                                                                   = (known after apply)
+      + id                                                                    = (known after apply)
+      + load_balancer_arn                                                     = (known after apply)
+      + port                                                                  = 80
+      + protocol                                                              = "HTTP"
+      + routing_http_request_x_amzn_mtls_clientcert_header_name               = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_issuer_header_name        = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_leaf_header_name          = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_subject_header_name       = (known after apply)
+      + routing_http_request_x_amzn_mtls_clientcert_validity_header_name      = (known after apply)
+      + routing_http_request_x_amzn_tls_cipher_suite_header_name              = (known after apply)
+      + routing_http_request_x_amzn_tls_version_header_name                   = (known after apply)
+      + routing_http_response_access_control_allow_credentials_header_value   = (known after apply)
+      + routing_http_response_access_control_allow_headers_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_methods_header_value       = (known after apply)
+      + routing_http_response_access_control_allow_origin_header_value        = (known after apply)
+      + routing_http_response_access_control_expose_headers_header_value      = (known after apply)
+      + routing_http_response_access_control_max_age_header_value             = (known after apply)
+      + routing_http_response_content_security_policy_header_value            = (known after apply)
+      + routing_http_response_server_enabled                                  = (known after apply)
+      + routing_http_response_strict_transport_security_header_value          = (known after apply)
+      + routing_http_response_x_content_type_options_header_value             = (known after apply)
+      + routing_http_response_x_frame_options_header_value                    = (known after apply)
+      + ssl_policy                                                            = (known after apply)
+      + tags_all                                                              = {
+          + "ManagedBy" = "terraform"
+          + "Project"   = "atlasbook"
+        }
+      + tcp_idle_timeout_seconds                                              = (known after apply)
+
+      + default_action {
+          + order            = (known after apply)
+          + target_group_arn = (known after apply)
+          + type             = "forward"
+        }
+
+      + mutual_authentication (known after apply)
+    }
+
+  # aws_lb_target_group.app will be created
+  + resource "aws_lb_target_group" "app" {
+      + arn                                = (known after apply)
+      + arn_suffix                         = (known after apply)
+      + connection_termination             = (known after apply)
+      + deregistration_delay               = "30"
+      + id                                 = (known after apply)
+      + ip_address_type                    = (known after apply)
+      + lambda_multi_value_headers_enabled = false
+      + load_balancer_arns                 = (known after apply)
+      + load_balancing_algorithm_type      = (known after apply)
+      + load_balancing_anomaly_mitigation  = (known after apply)
+      + load_balancing_cross_zone_enabled  = (known after apply)
+      + name                               = "atlasbook-tg"
+      + name_prefix                        = (known after apply)
+      + port                               = 80
+      + preserve_client_ip                 = (known after apply)
+      + protocol                           = "HTTP"
+      + protocol_version                   = (known after apply)
+      + proxy_protocol_v2                  = false
+      + slow_start                         = 0
+      + tags                               = {
+          + "Name" = "atlasbook-tg"
+        }
+      + tags_all                           = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-tg"
+          + "Project"   = "atlasbook"
+        }
+      + target_type                        = "instance"
+      + vpc_id                             = (known after apply)
+
+      + health_check {
+          + enabled             = true
+          + healthy_threshold   = 2
+          + interval            = 15
+          + matcher             = "200"
+          + path                = "/health"
+          + port                = "traffic-port"
+          + protocol            = "HTTP"
+          + timeout             = 5
+          + unhealthy_threshold = 3
+        }
+
+      + stickiness (known after apply)
+
+      + target_failover (known after apply)
+
+      + target_group_health (known after apply)
+
+      + target_health_state (known after apply)
+    }
+
+  # aws_nat_gateway.main will be created
+  + resource "aws_nat_gateway" "main" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name" = "atlasbook-nat"
+        }
+      + tags_all                           = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-nat"
+          + "Project"   = "atlasbook"
+        }
+    }
+
+  # aws_route_table.app will be created
+  + resource "aws_route_table" "app" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + nat_gateway_id             = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "atlasbook-rt-app"
+        }
+      + tags_all         = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-rt-app"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "atlasbook-rt-public"
+        }
+      + tags_all         = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-rt-public"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table_association.app[0] will be created
+  + resource "aws_route_table_association" "app" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.app[1] will be created
+  + resource "aws_route_table_association" "app" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.public[0] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.public[1] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_s3_bucket.backups will be created
+  + resource "aws_s3_bucket" "backups" {
+      + acceleration_status         = (known after apply)
+      + acl                         = (known after apply)
+      + arn                         = (known after apply)
+      + bucket                      = (known after apply)
+      + bucket_domain_name          = (known after apply)
+      + bucket_prefix               = (known after apply)
+      + bucket_regional_domain_name = (known after apply)
+      + force_destroy               = true
+      + hosted_zone_id              = (known after apply)
+      + id                          = (known after apply)
+      + object_lock_enabled         = (known after apply)
+      + policy                      = (known after apply)
+      + region                      = (known after apply)
+      + request_payer               = (known after apply)
+      + tags                        = {
+          + "Name" = "atlasbook-backups"
+        }
+      + tags_all                    = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-backups"
+          + "Project"   = "atlasbook"
+        }
+      + website_domain              = (known after apply)
+      + website_endpoint            = (known after apply)
+
+      + cors_rule (known after apply)
+
+      + grant (known after apply)
+
+      + lifecycle_rule (known after apply)
+
+      + logging (known after apply)
+
+      + object_lock_configuration (known after apply)
+
+      + replication_configuration (known after apply)
+
+      + server_side_encryption_configuration (known after apply)
+
+      + versioning (known after apply)
+
+      + website (known after apply)
+    }
+
+  # aws_s3_bucket_lifecycle_configuration.backups will be created
+  + resource "aws_s3_bucket_lifecycle_configuration" "backups" {
+      + bucket                                 = (known after apply)
+      + expected_bucket_owner                  = (known after apply)
+      + id                                     = (known after apply)
+      + transition_default_minimum_object_size = "all_storage_classes_128K"
+
+      + rule {
+          + id     = "retention-versions"
+          + status = "Enabled"
+            # (1 unchanged attribute hidden)
+
+          + abort_incomplete_multipart_upload {
+              + days_after_initiation = 7
+            }
+
+          + filter {
+                # (1 unchanged attribute hidden)
+            }
+
+          + noncurrent_version_expiration {
+              + noncurrent_days = 90
+            }
+        }
+    }
+
+  # aws_s3_bucket_policy.backups will be created
+  + resource "aws_s3_bucket_policy" "backups" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + policy = (known after apply)
+    }
+
+  # aws_s3_bucket_public_access_block.backups will be created
+  + resource "aws_s3_bucket_public_access_block" "backups" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = (known after apply)
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + restrict_public_buckets = true
+    }
+
+  # aws_s3_bucket_server_side_encryption_configuration.backups will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "backups" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+
+      + rule {
+          + apply_server_side_encryption_by_default {
+              + sse_algorithm     = "AES256"
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_s3_bucket_versioning.backups will be created
+  + resource "aws_s3_bucket_versioning" "backups" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+  # aws_security_group.alb will be created
+  + resource "aws_security_group" "alb" {
+      + arn                    = (known after apply)
+      + description            = "ALB : HTTP depuis Internet, sortie vers les subnets applicatifs"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "10.10.11.0/24",
+                  + "10.10.12.0/24",
+                ]
+              + description      = "HTTP vers les instances applicatives"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "HTTP depuis Internet"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+        ]
+      + name                   = "atlasbook-alb-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "atlasbook-alb-sg"
+        }
+      + tags_all               = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-alb-sg"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.app will be created
+  + resource "aws_security_group" "app" {
+      + arn                    = (known after apply)
+      + description            = "Instances applicatives : HTTP depuis l ALB, SSH depuis le bastion"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "HTTP pour apt"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "HTTPS pour apt et S3"
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+            },
+          + {
+              + cidr_blocks      = [
+                  + "10.10.21.0/24",
+                  + "10.10.22.0/24",
+                ]
+              + description      = "PostgreSQL vers les subnets donnees"
+              + from_port        = 5432
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 5432
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "HTTP depuis le SG de l ALB uniquement"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = []
+              + description      = "SSH depuis le SG du bastion uniquement"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + name                   = "atlasbook-app-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "atlasbook-app-sg"
+        }
+      + tags_all               = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-app-sg"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.bastion will be created
+  + resource "aws_security_group" "bastion" {
+      + arn                    = (known after apply)
+      + description            = "Bastion : SSH depuis l IP admin uniquement"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "10.10.11.0/24",
+                  + "10.10.12.0/24",
+                ]
+              + description      = "SSH vers les instances applicatives"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "<IP_ADMIN>/32",
+                ]
+              + description      = "SSH depuis l IP publique de l administrateur"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + name                   = "atlasbook-bastion-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "atlasbook-bastion-sg"
+        }
+      + tags_all               = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-bastion-sg"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.rds will be created
+  + resource "aws_security_group" "rds" {
+      + arn                    = (known after apply)
+      + description            = "RDS : PostgreSQL depuis le SG applicatif uniquement"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "PostgreSQL depuis le SG applicatif uniquement"
+              + from_port        = 5432
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 5432
+            },
+        ]
+      + name                   = "atlasbook-rds-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "atlasbook-rds-sg"
+        }
+      + tags_all               = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-rds-sg"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_subnet.app[0] will be created
+  + resource "aws_subnet" "app" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.11.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-app-1"
+          + "Tier" = "app"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-app-1"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "app"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.app[1] will be created
+  + resource "aws_subnet" "app" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.12.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-app-2"
+          + "Tier" = "app"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-app-2"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "app"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.data[0] will be created
+  + resource "aws_subnet" "data" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.21.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-data-1"
+          + "Tier" = "data"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-data-1"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "data"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.data[1] will be created
+  + resource "aws_subnet" "data" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.22.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-data-2"
+          + "Tier" = "data"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-data-2"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "data"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public[0] will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-public-1"
+          + "Tier" = "public"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-public-1"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "public"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public[1] will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "atlasbook-public-2"
+          + "Tier" = "public"
+        }
+      + tags_all                                       = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-public-2"
+          + "Project"   = "atlasbook"
+          + "Tier"      = "public"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_vpc.main will be created
+  + resource "aws_vpc" "main" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.10.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = true
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags                                 = {
+          + "Name" = "atlasbook-vpc"
+        }
+      + tags_all                             = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-vpc"
+          + "Project"   = "atlasbook"
+        }
+    }
+
+  # aws_vpc_endpoint.s3 will be created
+  + resource "aws_vpc_endpoint" "s3" {
+      + arn                   = (known after apply)
+      + cidr_blocks           = (known after apply)
+      + dns_entry             = (known after apply)
+      + id                    = (known after apply)
+      + ip_address_type       = (known after apply)
+      + network_interface_ids = (known after apply)
+      + owner_id              = (known after apply)
+      + policy                = (known after apply)
+      + prefix_list_id        = (known after apply)
+      + private_dns_enabled   = (known after apply)
+      + requester_managed     = (known after apply)
+      + route_table_ids       = (known after apply)
+      + security_group_ids    = (known after apply)
+      + service_name          = "com.amazonaws.us-east-1.s3"
+      + service_region        = (known after apply)
+      + state                 = (known after apply)
+      + subnet_ids            = (known after apply)
+      + tags                  = {
+          + "Name" = "atlasbook-s3-endpoint"
+        }
+      + tags_all              = {
+          + "ManagedBy" = "terraform"
+          + "Name"      = "atlasbook-s3-endpoint"
+          + "Project"   = "atlasbook"
+        }
+      + vpc_endpoint_type     = "Gateway"
+      + vpc_id                = (known after apply)
+
+      + dns_options (known after apply)
+
+      + subnet_configuration (known after apply)
+    }
+
+  # random_id.bucket_suffix will be created
+  + resource "random_id" "bucket_suffix" {
+      + b64_std     = (known after apply)
+      + b64_url     = (known after apply)
+      + byte_length = 4
+      + dec         = (known after apply)
+      + hex         = (known after apply)
+      + id          = (known after apply)
+    }
+
+Plan: 36 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + alb_dns_name      = (known after apply)
+  + backup_bucket     = (known after apply)
+  + bastion_public_ip = (known after apply)
+  + db_name           = "atlasbook"
+  + db_username       = "atlas_admin"
+  + rds_address       = (known after apply)
+  + rds_endpoint      = (known after apply)
+random_id.bucket_suffix: Creating...
+random_id.bucket_suffix: Creation complete after 0s [id=6hosBQ]
+aws_vpc.main: Creating...
+aws_s3_bucket.backups: Creating...
+aws_vpc.main: Still creating... [00m10s elapsed]
+aws_vpc.main: Creation complete after 13s [id=vpc-0579fcff74cda8598]
+aws_subnet.app[1]: Creating...
+aws_subnet.public[1]: Creating...
+aws_security_group.alb: Creating...
+aws_subnet.data[0]: Creating...
+aws_security_group.bastion: Creating...
+aws_lb_target_group.app: Creating...
+aws_internet_gateway.main: Creating...
+aws_subnet.data[1]: Creating...
+aws_subnet.public[0]: Creating...
+aws_subnet.app[0]: Creating...
+aws_subnet.data[0]: Creation complete after 1s [id=subnet-0d4bcdd046dc38f9e]
+aws_internet_gateway.main: Creation complete after 1s [id=igw-03efcb4e5227eb49a]
+aws_eip.nat: Creating...
+aws_route_table.public: Creating...
+aws_subnet.data[1]: Creation complete after 1s [id=subnet-009a798226a1e7325]
+aws_db_subnet_group.main: Creating...
+aws_lb_target_group.app: Creation complete after 1s [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7]
+aws_route_table.public: Creation complete after 1s [id=rtb-09cdaa196133f9cd5]
+aws_db_subnet_group.main: Creation complete after 2s [id=atlasbook-db-subnets]
+aws_security_group.alb: Creation complete after 3s [id=sg-05c30feafe25af89c]
+aws_security_group.bastion: Creation complete after 3s [id=sg-00ca15a5c40664909]
+aws_security_group.app: Creating...
+aws_eip.nat: Creation complete after 2s [id=eipalloc-0350a697807f88cc9]
+aws_subnet.public[1]: Creation complete after 3s [id=subnet-005849e1e210a53a8]
+aws_subnet.public[0]: Creation complete after 4s [id=subnet-05b9a718b6a133802]
+aws_nat_gateway.main: Creating...
+aws_route_table_association.public[1]: Creating...
+aws_route_table_association.public[0]: Creating...
+aws_lb.app: Creating...
+aws_instance.bastion: Creating...
+aws_subnet.app[1]: Creation complete after 4s [id=subnet-00ca410144591a79b]
+aws_route_table_association.public[0]: Creation complete after 1s [id=rtbassoc-0210f87d1bc9a46f0]
+aws_route_table_association.public[1]: Creation complete after 1s [id=rtbassoc-01fc68f845a20eb20]
+aws_security_group.app: Creation complete after 3s [id=sg-03c333eacd37a5ae4]
+aws_security_group.rds: Creating...
+aws_launch_template.app: Creating...
+aws_security_group.rds: Creation complete after 3s [id=sg-049f0c41de0ce2e7b]
+aws_db_instance.main: Creating...
+aws_subnet.app[0]: Creation complete after 9s [id=subnet-0442d5a85d2c491a6]
+aws_launch_template.app: Creation complete after 6s [id=lt-07b4d3d01a3a77df6]
+aws_nat_gateway.main: Still creating... [00m10s elapsed]
+aws_instance.bastion: Still creating... [00m10s elapsed]
+aws_lb.app: Still creating... [00m10s elapsed]
+aws_instance.bastion: Creation complete after 14s [id=i-0fb676f27133ff255]
+aws_db_instance.main: Still creating... [00m10s elapsed]
+aws_nat_gateway.main: Still creating... [00m20s elapsed]
+aws_lb.app: Still creating... [00m20s elapsed]
+aws_db_instance.main: Still creating... [00m20s elapsed]
+aws_nat_gateway.main: Still creating... [00m30s elapsed]
+aws_lb.app: Still creating... [00m30s elapsed]
+aws_db_instance.main: Still creating... [00m30s elapsed]
+aws_nat_gateway.main: Still creating... [00m40s elapsed]
+aws_lb.app: Still creating... [00m40s elapsed]
+aws_db_instance.main: Still creating... [00m40s elapsed]
+aws_nat_gateway.main: Still creating... [00m50s elapsed]
+aws_lb.app: Still creating... [00m50s elapsed]
+aws_db_instance.main: Still creating... [00m50s elapsed]
+aws_nat_gateway.main: Still creating... [01m00s elapsed]
+aws_lb.app: Still creating... [01m00s elapsed]
+aws_db_instance.main: Still creating... [01m00s elapsed]
+aws_nat_gateway.main: Still creating... [01m10s elapsed]
+aws_lb.app: Still creating... [01m10s elapsed]
+aws_db_instance.main: Still creating... [01m10s elapsed]
+aws_nat_gateway.main: Still creating... [01m20s elapsed]
+aws_lb.app: Still creating... [01m20s elapsed]
+aws_db_instance.main: Still creating... [01m20s elapsed]
+aws_nat_gateway.main: Still creating... [01m30s elapsed]
+aws_lb.app: Still creating... [01m30s elapsed]
+aws_db_instance.main: Still creating... [01m30s elapsed]
+aws_nat_gateway.main: Still creating... [01m40s elapsed]
+aws_lb.app: Still creating... [01m40s elapsed]
+aws_db_instance.main: Still creating... [01m40s elapsed]
+aws_nat_gateway.main: Still creating... [01m50s elapsed]
+aws_lb.app: Still creating... [01m50s elapsed]
+aws_db_instance.main: Still creating... [01m50s elapsed]
+aws_nat_gateway.main: Creation complete after 1m55s [id=nat-0806af589b5344e0d]
+aws_route_table.app: Creating...
+aws_route_table.app: Creation complete after 2s [id=rtb-02dc8c72dc4078295]
+aws_route_table_association.app[0]: Creating...
+aws_vpc_endpoint.s3: Creating...
+aws_route_table_association.app[1]: Creating...
+aws_route_table_association.app[0]: Creation complete after 1s [id=rtbassoc-00369ca10a1fa41c1]
+aws_route_table_association.app[1]: Creation complete after 1s [id=rtbassoc-0057fe5614f08b8ad]
+aws_autoscaling_group.app: Creating...
+aws_lb.app: Still creating... [02m00s elapsed]
+aws_vpc_endpoint.s3: Creation complete after 7s [id=vpce-02d94ba886f4f480b]
+aws_db_instance.main: Still creating... [02m00s elapsed]
+aws_autoscaling_group.app: Still creating... [00m10s elapsed]
+aws_lb.app: Still creating... [02m10s elapsed]
+aws_lb.app: Creation complete after 2m13s [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:loadbalancer/app/atlasbook-alb/9ced94707641168d]
+aws_lb_listener.http: Creating...
+aws_lb_listener.http: Creation complete after 1s [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:listener/app/atlasbook-alb/9ced94707641168d/b234fc57607f0d9e]
+aws_db_instance.main: Still creating... [02m10s elapsed]
+aws_autoscaling_group.app: Creation complete after 18s [id=atlasbook-asg]
+aws_db_instance.main: Still creating... [02m20s elapsed]
+aws_db_instance.main: Still creating... [02m30s elapsed]
+aws_db_instance.main: Still creating... [02m40s elapsed]
+aws_db_instance.main: Still creating... [02m50s elapsed]
+aws_db_instance.main: Still creating... [03m00s elapsed]
+aws_db_instance.main: Still creating... [03m10s elapsed]
+aws_db_instance.main: Still creating... [03m20s elapsed]
+aws_db_instance.main: Still creating... [03m30s elapsed]
+aws_db_instance.main: Still creating... [03m40s elapsed]
+aws_db_instance.main: Still creating... [03m50s elapsed]
+aws_db_instance.main: Still creating... [04m00s elapsed]
+aws_db_instance.main: Still creating... [04m10s elapsed]
+aws_db_instance.main: Still creating... [04m20s elapsed]
+aws_db_instance.main: Still creating... [04m30s elapsed]
+aws_db_instance.main: Still creating... [04m40s elapsed]
+aws_db_instance.main: Still creating... [04m50s elapsed]
+aws_db_instance.main: Still creating... [05m00s elapsed]
+aws_db_instance.main: Creation complete after 5m7s [id=db-SBW5P737LS2655VTKN5XCKPGXI]
+
+Error: reading S3 Bucket (atlasbook-backups-ea1a2c05) object lock configuration: operation error S3: GetObjectLockConfiguration, https response error StatusCode: 403, RequestID: FYXCEKDWTFKC0BMZ, HostID: Q8a6jZbmQTJHoIzXCXMDBSZ+itXLpNhu3uaa/iDYcpoV8MN5xN2GMsLPLiIk/CQrneGrWVFkH107iuK4oTqN3xyDyQiPlSUm, api error AccessDenied: User: arn:aws:sts::212845664736:assumed-role/voclabs/user4925104=r.ali@ecole-ipssi.net is not authorized to perform: s3:GetBucketObjectLockConfiguration on resource: "arn:aws:s3:::atlasbook-backups-ea1a2c05" with an explicit deny in a service control policy: arn:aws:organizations::893089086263:policy/o-trnlkh6e4w/service_control_policy/p-ofqebha8
+
+  with aws_s3_bucket.backups,
+  on storage.tf line 14, in resource "aws_s3_bucket" "backups":
+  14: resource "aws_s3_bucket" "backups" {
+
+>> Echec du premier passage : tentative de contournement S3 (Object Lock)
+Resource instance aws_s3_bucket.backups has been successfully untainted.
+data.aws_ami.ubuntu: Reading...
+data.aws_availability_zones.available: Reading...
+data.aws_caller_identity.current: Reading...
+data.aws_caller_identity.current: Read complete after 0s [id=212845664736]
+data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+data.aws_ami.ubuntu: Read complete after 1s [id=ami-062944a84867f2386]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_s3_bucket_lifecycle_configuration.backups will be created
+  + resource "aws_s3_bucket_lifecycle_configuration" "backups" {
+      + bucket                                 = "atlasbook-backups-ea1a2c05"
+      + expected_bucket_owner                  = (known after apply)
+      + id                                     = (known after apply)
+      + transition_default_minimum_object_size = "all_storage_classes_128K"
+
+      + rule {
+          + id     = "retention-versions"
+          + status = "Enabled"
+            # (1 unchanged attribute hidden)
+
+          + abort_incomplete_multipart_upload {
+              + days_after_initiation = 7
+            }
+
+          + filter {
+                # (1 unchanged attribute hidden)
+            }
+
+          + noncurrent_version_expiration {
+              + noncurrent_days = 90
+            }
+        }
+    }
+
+  # aws_s3_bucket_policy.backups will be created
+  + resource "aws_s3_bucket_policy" "backups" {
+      + bucket = "atlasbook-backups-ea1a2c05"
+      + id     = (known after apply)
+      + policy = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "s3:*"
+                      + Condition = {
+                          + Bool = {
+                              + "aws:SecureTransport" = "false"
+                            }
+                        }
+                      + Effect    = "Deny"
+                      + Principal = "*"
+                      + Resource  = [
+                          + "arn:aws:s3:::atlasbook-backups-ea1a2c05",
+                          + "arn:aws:s3:::atlasbook-backups-ea1a2c05/*",
+                        ]
+                      + Sid       = "DenyNonTLS"
+                    },
+                  + {
+                      + Action    = "s3:*"
+                      + Condition = {
+                          + StringNotEquals = {
+                              + "aws:PrincipalAccount" = "212845664736"
+                            }
+                        }
+                      + Effect    = "Deny"
+                      + Principal = "*"
+                      + Resource  = [
+                          + "arn:aws:s3:::atlasbook-backups-ea1a2c05",
+                          + "arn:aws:s3:::atlasbook-backups-ea1a2c05/*",
+                        ]
+                      + Sid       = "DenyAccessOutsideAccount"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+    }
+
+  # aws_s3_bucket_public_access_block.backups will be created
+  + resource "aws_s3_bucket_public_access_block" "backups" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = "atlasbook-backups-ea1a2c05"
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + restrict_public_buckets = true
+    }
+
+  # aws_s3_bucket_server_side_encryption_configuration.backups will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "backups" {
+      + bucket = "atlasbook-backups-ea1a2c05"
+      + id     = (known after apply)
+
+      + rule {
+          + apply_server_side_encryption_by_default {
+              + sse_algorithm     = "AES256"
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_s3_bucket_versioning.backups will be created
+  + resource "aws_s3_bucket_versioning" "backups" {
+      + bucket = "atlasbook-backups-ea1a2c05"
+      + id     = (known after apply)
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+Plan: 5 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + backup_bucket     = "atlasbook-backups-ea1a2c05"
+aws_s3_bucket_versioning.backups: Creating...
+aws_s3_bucket_server_side_encryption_configuration.backups: Creating...
+aws_s3_bucket_public_access_block.backups: Creating...
+aws_s3_bucket_public_access_block.backups: Creation complete after 0s [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_policy.backups: Creating...
+aws_s3_bucket_server_side_encryption_configuration.backups: Creation complete after 0s [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_policy.backups: Creation complete after 1s [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_versioning.backups: Creation complete after 2s [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_lifecycle_configuration.backups: Creating...
+aws_s3_bucket_lifecycle_configuration.backups: Still creating... [00m10s elapsed]
+aws_s3_bucket_lifecycle_configuration.backups: Still creating... [00m20s elapsed]
+aws_s3_bucket_lifecycle_configuration.backups: Still creating... [00m30s elapsed]
+aws_s3_bucket_lifecycle_configuration.backups: Still creating... [00m40s elapsed]
+aws_s3_bucket_lifecycle_configuration.backups: Still creating... [00m50s elapsed]
+aws_s3_bucket_lifecycle_configuration.backups: Creation complete after 57s [id=atlasbook-backups-ea1a2c05]
+
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+alb_dns_name = "atlasbook-alb-1146779469.us-east-1.elb.amazonaws.com"
+backup_bucket = "atlasbook-backups-ea1a2c05"
+bastion_public_ip = "3.222.205.217"
+db_name = "atlasbook"
+db_username = "atlas_admin"
+rds_address = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com"
+rds_endpoint = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com:5432"
+./apply.sh -auto-approve -no-color  15,86s user 0,44s system 4% cpu 6:45,84 total

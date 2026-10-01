@@ -1,0 +1,7 @@
+alb_dns_name = "atlasbook-alb-1146779469.us-east-1.elb.amazonaws.com"
+backup_bucket = "atlasbook-backups-ea1a2c05"
+bastion_public_ip = "3.222.205.217"
+db_name = "atlasbook"
+db_username = "atlas_admin"
+rds_address = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com"
+rds_endpoint = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com:5432"

@@ -1,0 +1,55 @@
+---
+# Playbook principal : applique le socle commun puis la couche applicative aux
+# instances de l'Auto Scaling Group. Les hôtes viennent de l'inventaire
+# dynamique (groupe role_app), jamais d'une liste écrite à la main. Les rôles
+# portent toute la logique : ce fichier reste volontairement court.
+- name: Configurer les instances applicatives AtlasBook
+  hosts: role_app
+  become: true
+
+  roles:
+    - common
+    - webapp
+
+  # Contrôles automatiques de fin de passage : si le site ou la base ne
+  # répondent pas comme prévu, le playbook échoue au lieu de laisser croire que
+  # tout va bien.
+  post_tasks:
+    - name: Vérifier que le point de health check répond
+      ansible.builtin.uri:
+        url: http://localhost/health
+        status_code: 200
+        return_content: true
+      register: webapp_health
+      changed_when: false
+      # Lecture seule : on l'exécute même en mode --check, sinon le module est
+      # sauté et l'assertion suivante échoue faute de résultat à examiner.
+      check_mode: false
+
+    - name: Récupérer la page de test
+      ansible.builtin.uri:
+        url: http://localhost/
+        status_code: 200
+        return_content: true
+      register: webapp_page
+      changed_when: false
+      check_mode: false
+
+    - name: Contrôler le contenu de /health et de la page de test
+      ansible.builtin.assert:
+        that:
+          - webapp_health.status == 200
+          - "'ok' in webapp_health.content"
+          - webapp_page.status == 200
+          - "'Connexion RDS : OK' in webapp_page.content"
+        fail_msg: La page de test ou la connexion à la base est défaillante
+        success_msg: Site, health check et connexion RDS conformes
+
+    # Contrôle de sécurité : le mot de passe ne doit jamais apparaître dans la
+    # page servie. no_log évite qu'un échec n'affiche la valeur comparée.
+    - name: Vérifier que le mot de passe n'est pas exposé dans la page
+      ansible.builtin.assert:
+        that:
+          - webapp_db_password not in webapp_page.content
+        quiet: true
+      no_log: true

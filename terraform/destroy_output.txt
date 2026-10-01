@@ -1,0 +1,1381 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.app will be destroyed
+  - resource "aws_autoscaling_group" "app" {
+      - arn                              = "arn:aws:autoscaling:us-east-1:212845664736:autoScalingGroup:9495d27e-2f81-4ed8-b3a6-632af1d87933:autoScalingGroupName/atlasbook-asg" -> null
+      - availability_zones               = [
+          - "us-east-1a",
+          - "us-east-1b",
+        ] -> null
+      - capacity_rebalance               = false -> null
+      - default_cooldown                 = 300 -> null
+      - default_instance_warmup          = 0 -> null
+      - desired_capacity                 = 2 -> null
+      - force_delete                     = false -> null
+      - force_delete_warm_pool           = false -> null
+      - health_check_grace_period        = 300 -> null
+      - health_check_type                = "ELB" -> null
+      - id                               = "atlasbook-asg" -> null
+      - ignore_failed_scaling_activities = false -> null
+      - load_balancers                   = [] -> null
+      - max_instance_lifetime            = 0 -> null
+      - max_size                         = 3 -> null
+      - metrics_granularity              = "1Minute" -> null
+      - min_size                         = 2 -> null
+      - name                             = "atlasbook-asg" -> null
+      - predicted_capacity               = 0 -> null
+      - protect_from_scale_in            = false -> null
+      - service_linked_role_arn          = "arn:aws:iam::212845664736:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling" -> null
+      - target_group_arns                = [
+          - "arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7",
+        ] -> null
+      - vpc_zone_identifier              = [
+          - "subnet-00ca410144591a79b",
+          - "subnet-0442d5a85d2c491a6",
+        ] -> null
+      - wait_for_capacity_timeout        = "10m" -> null
+      - warm_pool_size                   = 0 -> null
+        # (5 unchanged attributes hidden)
+
+      - availability_zone_distribution {
+          - capacity_distribution_strategy = "balanced-best-effort" -> null
+        }
+
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "default" -> null
+        }
+
+      - launch_template {
+          - id      = "lt-07b4d3d01a3a77df6" -> null
+          - name    = "atlasbook-app-20261001094229222500000004" -> null
+          - version = "$Latest" -> null
+        }
+
+      - tag {
+          - key                 = "Name" -> null
+          - propagate_at_launch = true -> null
+          - value               = "atlasbook-app" -> null
+        }
+      - tag {
+          - key                 = "Project" -> null
+          - propagate_at_launch = true -> null
+          - value               = "atlasbook" -> null
+        }
+      - tag {
+          - key                 = "Role" -> null
+          - propagate_at_launch = true -> null
+          - value               = "app" -> null
+        }
+
+      - traffic_source {
+          - identifier = "arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7" -> null
+          - type       = "elbv2" -> null
+        }
+    }
+
+  # aws_db_instance.main will be destroyed
+  - resource "aws_db_instance" "main" {
+      - address                               = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com" -> null
+      - allocated_storage                     = 20 -> null
+      - apply_immediately                     = false -> null
+      - arn                                   = "arn:aws:rds:us-east-1:212845664736:db:atlasbook-db" -> null
+      - auto_minor_version_upgrade            = true -> null
+      - availability_zone                     = "us-east-1a" -> null
+      - backup_retention_period               = 0 -> null
+      - backup_target                         = "region" -> null
+      - backup_window                         = "07:11-07:41" -> null
+      - ca_cert_identifier                    = "rds-ca-rsa2048-g1" -> null
+      - copy_tags_to_snapshot                 = false -> null
+      - customer_owned_ip_enabled             = false -> null
+      - database_insights_mode                = "standard" -> null
+      - db_name                               = "atlasbook" -> null
+      - db_subnet_group_name                  = "atlasbook-db-subnets" -> null
+      - dedicated_log_volume                  = false -> null
+      - delete_automated_backups              = true -> null
+      - deletion_protection                   = false -> null
+      - endpoint                              = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com:5432" -> null
+      - engine                                = "postgres" -> null
+      - engine_lifecycle_support              = "open-source-rds-extended-support" -> null
+      - engine_version                        = "16.15" -> null
+      - engine_version_actual                 = "16.15" -> null
+      - hosted_zone_id                        = "Z2R2ITUGPM61AM" -> null
+      - iam_database_authentication_enabled   = false -> null
+      - id                                    = "db-SBW5P737LS2655VTKN5XCKPGXI" -> null
+      - identifier                            = "atlasbook-db" -> null
+      - instance_class                        = "db.t3.micro" -> null
+      - iops                                  = 0 -> null
+      - kms_key_id                            = "arn:aws:kms:us-east-1:212845664736:key/26d5a54d-a90e-4e66-a61e-88c946ce4950" -> null
+      - license_model                         = "postgresql-license" -> null
+      - listener_endpoint                     = [] -> null
+      - maintenance_window                    = "thu:05:16-thu:05:46" -> null
+      - master_user_secret                    = [] -> null
+      - max_allocated_storage                 = 0 -> null
+      - monitoring_interval                   = 0 -> null
+      - multi_az                              = false -> null
+      - network_type                          = "IPV4" -> null
+      - option_group_name                     = "default:postgres-16" -> null
+      - parameter_group_name                  = "default.postgres16" -> null
+      - password                              = (sensitive value) -> null
+      - password_wo                           = (write-only attribute) -> null
+      - performance_insights_enabled          = false -> null
+      - performance_insights_retention_period = 0 -> null
+      - port                                  = 5432 -> null
+      - publicly_accessible                   = false -> null
+      - replicas                              = [] -> null
+      - resource_id                           = "db-SBW5P737LS2655VTKN5XCKPGXI" -> null
+      - skip_final_snapshot                   = true -> null
+      - status                                = "available" -> null
+      - storage_encrypted                     = true -> null
+      - storage_throughput                    = 0 -> null
+      - storage_type                          = "gp2" -> null
+      - tags                                  = {
+          - "Name" = "atlasbook-db"
+        } -> null
+      - tags_all                              = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-db"
+          - "Project"   = "atlasbook"
+        } -> null
+      - username                              = "atlas_admin" -> null
+      - vpc_security_group_ids                = [
+          - "sg-049f0c41de0ce2e7b",
+        ] -> null
+        # (15 unchanged attributes hidden)
+    }
+
+  # aws_db_subnet_group.main will be destroyed
+  - resource "aws_db_subnet_group" "main" {
+      - arn                     = "arn:aws:rds:us-east-1:212845664736:subgrp:atlasbook-db-subnets" -> null
+      - description             = "Managed by Terraform" -> null
+      - id                      = "atlasbook-db-subnets" -> null
+      - name                    = "atlasbook-db-subnets" -> null
+      - subnet_ids              = [
+          - "subnet-009a798226a1e7325",
+          - "subnet-0d4bcdd046dc38f9e",
+        ] -> null
+      - supported_network_types = [
+          - "IPV4",
+        ] -> null
+      - tags                    = {
+          - "Name" = "atlasbook-db-subnets"
+        } -> null
+      - tags_all                = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-db-subnets"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                  = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_eip.nat will be destroyed
+  - resource "aws_eip" "nat" {
+      - allocation_id            = "eipalloc-0350a697807f88cc9" -> null
+      - arn                      = "arn:aws:ec2:us-east-1:212845664736:elastic-ip/eipalloc-0350a697807f88cc9" -> null
+      - domain                   = "vpc" -> null
+      - id                       = "eipalloc-0350a697807f88cc9" -> null
+      - network_border_group     = "us-east-1" -> null
+      - public_dns               = "ec2-3-212-77-150.compute-1.amazonaws.com" -> null
+      - public_ip                = "3.212.77.150" -> null
+      - public_ipv4_pool         = "amazon" -> null
+      - tags                     = {
+          - "Name" = "atlasbook-nat-eip"
+        } -> null
+      - tags_all                 = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-nat-eip"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc                      = true -> null
+        # (8 unchanged attributes hidden)
+    }
+
+  # aws_instance.bastion will be destroyed
+  - resource "aws_instance" "bastion" {
+      - ami                                  = "ami-062944a84867f2386" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:212845664736:instance/i-0fb676f27133ff255" -> null
+      - associate_public_ip_address          = true -> null
+      - availability_zone                    = "us-east-1a" -> null
+      - cpu_core_count                       = 1 -> null
+      - cpu_threads_per_core                 = 2 -> null
+      - disable_api_stop                     = false -> null
+      - disable_api_termination              = false -> null
+      - ebs_optimized                        = false -> null
+      - get_password_data                    = false -> null
+      - hibernation                          = false -> null
+      - id                                   = "i-0fb676f27133ff255" -> null
+      - instance_initiated_shutdown_behavior = "stop" -> null
+      - instance_state                       = "running" -> null
+      - instance_type                        = "t3.micro" -> null
+      - ipv6_address_count                   = 0 -> null
+      - ipv6_addresses                       = [] -> null
+      - key_name                             = "tp-ryad-galaktus-key" -> null
+      - monitoring                           = false -> null
+      - placement_partition_number           = 0 -> null
+      - primary_network_interface_id         = "eni-036df1d00f7fa0e81" -> null
+      - private_dns                          = "ip-10-10-1-191.ec2.internal" -> null
+      - private_ip                           = "10.10.1.191" -> null
+      - public_dns                           = "ec2-3-222-205-217.compute-1.amazonaws.com" -> null
+      - public_ip                            = "3.222.205.217" -> null
+      - secondary_private_ips                = [] -> null
+      - security_groups                      = [] -> null
+      - source_dest_check                    = true -> null
+      - subnet_id                            = "subnet-05b9a718b6a133802" -> null
+      - tags                                 = {
+          - "Name" = "atlasbook-bastion"
+          - "Role" = "bastion"
+        } -> null
+      - tags_all                             = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-bastion"
+          - "Project"   = "atlasbook"
+          - "Role"      = "bastion"
+        } -> null
+      - tenancy                              = "default" -> null
+      - user_data_replace_on_change          = false -> null
+      - vpc_security_group_ids               = [
+          - "sg-00ca15a5c40664909",
+        ] -> null
+        # (7 unchanged attributes hidden)
+
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "open" -> null
+        }
+
+      - cpu_options {
+          - core_count       = 1 -> null
+          - threads_per_core = 2 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - credit_specification {
+          - cpu_credits = "unlimited" -> null
+        }
+
+      - enclave_options {
+          - enabled = false -> null
+        }
+
+      - maintenance_options {
+          - auto_recovery = "default" -> null
+        }
+
+      - metadata_options {
+          - http_endpoint               = "enabled" -> null
+          - http_protocol_ipv6          = "disabled" -> null
+          - http_put_response_hop_limit = 1 -> null
+          - http_tokens                 = "required" -> null
+          - instance_metadata_tags      = "disabled" -> null
+        }
+
+      - private_dns_name_options {
+          - enable_resource_name_dns_a_record    = false -> null
+          - enable_resource_name_dns_aaaa_record = false -> null
+          - hostname_type                        = "ip-name" -> null
+        }
+
+      - root_block_device {
+          - delete_on_termination = true -> null
+          - device_name           = "/dev/sda1" -> null
+          - encrypted             = false -> null
+          - iops                  = 100 -> null
+          - tags                  = {
+              - "ManagedBy" = "terraform"
+              - "Project"   = "atlasbook"
+            } -> null
+          - tags_all              = {
+              - "ManagedBy" = "terraform"
+              - "Project"   = "atlasbook"
+            } -> null
+          - throughput            = 0 -> null
+          - volume_id             = "vol-0efd2a059a1ac5cc1" -> null
+          - volume_size           = 8 -> null
+          - volume_type           = "gp2" -> null
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # aws_internet_gateway.main will be destroyed
+  - resource "aws_internet_gateway" "main" {
+      - arn      = "arn:aws:ec2:us-east-1:212845664736:internet-gateway/igw-03efcb4e5227eb49a" -> null
+      - id       = "igw-03efcb4e5227eb49a" -> null
+      - owner_id = "212845664736" -> null
+      - tags     = {
+          - "Name" = "atlasbook-igw"
+        } -> null
+      - tags_all = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-igw"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id   = "vpc-0579fcff74cda8598" -> null
+    }
+
+  # aws_launch_template.app will be destroyed
+  - resource "aws_launch_template" "app" {
+      - arn                                  = "arn:aws:ec2:us-east-1:212845664736:launch-template/lt-07b4d3d01a3a77df6" -> null
+      - default_version                      = 1 -> null
+      - disable_api_stop                     = false -> null
+      - disable_api_termination              = false -> null
+      - id                                   = "lt-07b4d3d01a3a77df6" -> null
+      - image_id                             = "ami-062944a84867f2386" -> null
+      - instance_type                        = "t3.micro" -> null
+      - key_name                             = "tp-ryad-galaktus-key" -> null
+      - latest_version                       = 1 -> null
+      - name                                 = "atlasbook-app-20261001094229222500000004" -> null
+      - name_prefix                          = "atlasbook-app-" -> null
+      - tags_all                             = {
+          - "ManagedBy" = "terraform"
+          - "Project"   = "atlasbook"
+        } -> null
+      - user_data                            = "IyEvYmluL2Jhc2gKIyBBbW9yw6dhZ2UgbWluaW1hbCBleMOpY3V0w6kgcGFyIGNsb3VkLWluaXQgYXUgcHJlbWllciBkw6ltYXJyYWdlLgojIE9iamVjdGlmIDogcXVlIGwnaW5zdGFuY2UgcsOpcG9uZGUgMjAwIHN1ciAvaGVhbHRoIGTDqHMgcXVlIHBvc3NpYmxlLCBwb3VyCiMgcGFzc2VyICJoZWFsdGh5IiBkYW5zIGxlIFRhcmdldCBHcm91cCBhdmFudCBsZSBwYXNzYWdlIGQnQW5zaWJsZS4KIyBMYSBjb25maWd1cmF0aW9uIGFwcGxpY2F0aXZlIHLDqWVsbGUgKHZob3N0LCBQSFAsIGFjY8OocyBiYXNlKSBlc3QgZmFpdGUgcGFyCiMgQW5zaWJsZSwgcXVpIHJlbXBsYWNlIGNlIHNpdGUgcGFyIGTDqWZhdXQuCnNldCAtZXVvIHBpcGVmYWlsCgpleHBvcnQgREVCSUFOX0ZST05URU5EPW5vbmludGVyYWN0aXZlCmFwdC1nZXQgdXBkYXRlIC15CmFwdC1nZXQgaW5zdGFsbCAteSBuZ2lueAoKIyBTaXRlIHBhciBkw6lmYXV0IHZvbG9udGFpcmVtZW50IHRyaXZpYWwgOiAvaGVhbHRoIHBvdXIgbCdBTEIsIGV0IHVuZSBwYWdlCiMgcXVpIGluZGlxdWUgcXVlIGwnaW5zdGFuY2Ugbidlc3QgcGFzIGVuY29yZSBjb25maWd1csOpZS4KY2F0ID4gL2V0Yy9uZ2lueC9zaXRlcy1hdmFpbGFibGUvZGVmYXVsdCA8PCdOR0lOWCcKc2VydmVyIHsKICAgIGxpc3RlbiA4MCBkZWZhdWx0X3NlcnZlcjsKICAgIHNlcnZlcl9uYW1lIF87CgogICAgbG9jYXRpb24gL2hlYWx0aCB7CiAgICAgICAgZGVmYXVsdF90eXBlIHRleHQvcGxhaW47CiAgICAgICAgcmV0dXJuIDIwMCAib2tcbiI7CiAgICB9CgogICAgbG9jYXRpb24gLyB7CiAgICAgICAgZGVmYXVsdF90eXBlIHRleHQvcGxhaW47CiAgICAgICAgcmV0dXJuIDIwMCAiaW5zdGFuY2UgYW1vcmNlZSwgY29uZmlndXJhdGlvbiBBbnNpYmxlIGVuIGF0dGVudGVcbiI7CiAgICB9Cn0KTkdJTlgKCnN5c3RlbWN0bCBlbmFibGUgbmdpbngKc3lzdGVtY3RsIHJlc3RhcnQgbmdpbngK" -> null
+      - vpc_security_group_ids               = [
+          - "sg-03c333eacd37a5ae4",
+        ] -> null
+        # (5 unchanged attributes hidden)
+
+      - iam_instance_profile {
+          - name = "LabInstanceProfile" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - metadata_options {
+          - http_endpoint               = "enabled" -> null
+          - http_put_response_hop_limit = 0 -> null
+          - http_tokens                 = "required" -> null
+            # (2 unchanged attributes hidden)
+        }
+    }
+
+  # aws_lb.app will be destroyed
+  - resource "aws_lb" "app" {
+      - arn                                                          = "arn:aws:elasticloadbalancing:us-east-1:212845664736:loadbalancer/app/atlasbook-alb/9ced94707641168d" -> null
+      - arn_suffix                                                   = "app/atlasbook-alb/9ced94707641168d" -> null
+      - client_keep_alive                                            = 3600 -> null
+      - desync_mitigation_mode                                       = "defensive" -> null
+      - dns_name                                                     = "atlasbook-alb-1146779469.us-east-1.elb.amazonaws.com" -> null
+      - drop_invalid_header_fields                                   = false -> null
+      - enable_cross_zone_load_balancing                             = true -> null
+      - enable_deletion_protection                                   = false -> null
+      - enable_http2                                                 = true -> null
+      - enable_tls_version_and_cipher_suite_headers                  = false -> null
+      - enable_waf_fail_open                                         = false -> null
+      - enable_xff_client_port                                       = false -> null
+      - enable_zonal_shift                                           = false -> null
+      - id                                                           = "arn:aws:elasticloadbalancing:us-east-1:212845664736:loadbalancer/app/atlasbook-alb/9ced94707641168d" -> null
+      - idle_timeout                                                 = 60 -> null
+      - internal                                                     = false -> null
+      - ip_address_type                                              = "ipv4" -> null
+      - load_balancer_type                                           = "application" -> null
+      - name                                                         = "atlasbook-alb" -> null
+      - preserve_host_header                                         = false -> null
+      - security_groups                                              = [
+          - "sg-05c30feafe25af89c",
+        ] -> null
+      - subnets                                                      = [
+          - "subnet-005849e1e210a53a8",
+          - "subnet-05b9a718b6a133802",
+        ] -> null
+      - tags                                                         = {
+          - "Name" = "atlasbook-alb"
+        } -> null
+      - tags_all                                                     = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-alb"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                                                       = "vpc-0579fcff74cda8598" -> null
+      - xff_header_processing_mode                                   = "append" -> null
+      - zone_id                                                      = "Z35SXDOTRQ7X7K" -> null
+        # (3 unchanged attributes hidden)
+
+      - access_logs {
+          - enabled = false -> null
+            # (2 unchanged attributes hidden)
+        }
+
+      - connection_logs {
+          - enabled = false -> null
+            # (2 unchanged attributes hidden)
+        }
+
+      - subnet_mapping {
+          - subnet_id            = "subnet-005849e1e210a53a8" -> null
+            # (4 unchanged attributes hidden)
+        }
+      - subnet_mapping {
+          - subnet_id            = "subnet-05b9a718b6a133802" -> null
+            # (4 unchanged attributes hidden)
+        }
+    }
+
+  # aws_lb_listener.http will be destroyed
+  - resource "aws_lb_listener" "http" {
+      - arn                                                                 = "arn:aws:elasticloadbalancing:us-east-1:212845664736:listener/app/atlasbook-alb/9ced94707641168d/b234fc57607f0d9e" -> null
+      - id                                                                  = "arn:aws:elasticloadbalancing:us-east-1:212845664736:listener/app/atlasbook-alb/9ced94707641168d/b234fc57607f0d9e" -> null
+      - load_balancer_arn                                                   = "arn:aws:elasticloadbalancing:us-east-1:212845664736:loadbalancer/app/atlasbook-alb/9ced94707641168d" -> null
+      - port                                                                = 80 -> null
+      - protocol                                                            = "HTTP" -> null
+      - routing_http_response_server_enabled                                = true -> null
+      - tags_all                                                            = {
+          - "ManagedBy" = "terraform"
+          - "Project"   = "atlasbook"
+        } -> null
+        # (11 unchanged attributes hidden)
+
+      - default_action {
+          - order            = 1 -> null
+          - target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7" -> null
+          - type             = "forward" -> null
+        }
+    }
+
+  # aws_lb_target_group.app will be destroyed
+  - resource "aws_lb_target_group" "app" {
+      - arn                                = "arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7" -> null
+      - arn_suffix                         = "targetgroup/atlasbook-tg/c6d8f177682351b7" -> null
+      - deregistration_delay               = "30" -> null
+      - id                                 = "arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7" -> null
+      - ip_address_type                    = "ipv4" -> null
+      - lambda_multi_value_headers_enabled = false -> null
+      - load_balancer_arns                 = [] -> null
+      - load_balancing_algorithm_type      = "round_robin" -> null
+      - load_balancing_anomaly_mitigation  = "off" -> null
+      - load_balancing_cross_zone_enabled  = "use_load_balancer_configuration" -> null
+      - name                               = "atlasbook-tg" -> null
+      - port                               = 80 -> null
+      - protocol                           = "HTTP" -> null
+      - protocol_version                   = "HTTP1" -> null
+      - proxy_protocol_v2                  = false -> null
+      - slow_start                         = 0 -> null
+      - tags                               = {
+          - "Name" = "atlasbook-tg"
+        } -> null
+      - tags_all                           = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-tg"
+          - "Project"   = "atlasbook"
+        } -> null
+      - target_type                        = "instance" -> null
+      - vpc_id                             = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+
+      - health_check {
+          - enabled             = true -> null
+          - healthy_threshold   = 2 -> null
+          - interval            = 15 -> null
+          - matcher             = "200" -> null
+          - path                = "/health" -> null
+          - port                = "traffic-port" -> null
+          - protocol            = "HTTP" -> null
+          - timeout             = 5 -> null
+          - unhealthy_threshold = 3 -> null
+        }
+
+      - stickiness {
+          - cookie_duration = 86400 -> null
+          - enabled         = false -> null
+          - type            = "lb_cookie" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - target_failover {}
+
+      - target_group_health {
+          - dns_failover {
+              - minimum_healthy_targets_count      = "1" -> null
+              - minimum_healthy_targets_percentage = "off" -> null
+            }
+          - unhealthy_state_routing {
+              - minimum_healthy_targets_count      = 1 -> null
+              - minimum_healthy_targets_percentage = "off" -> null
+            }
+        }
+
+      - target_health_state {}
+    }
+
+  # aws_nat_gateway.main will be destroyed
+  - resource "aws_nat_gateway" "main" {
+      - allocation_id                      = "eipalloc-0350a697807f88cc9" -> null
+      - association_id                     = "eipassoc-0a43e3501012ac2e9" -> null
+      - connectivity_type                  = "public" -> null
+      - id                                 = "nat-0806af589b5344e0d" -> null
+      - network_interface_id               = "eni-0788f8bf83ba69543" -> null
+      - private_ip                         = "10.10.1.61" -> null
+      - public_ip                          = "3.212.77.150" -> null
+      - secondary_private_ip_address_count = 0 -> null
+      - secondary_private_ip_addresses     = [] -> null
+      - subnet_id                          = "subnet-05b9a718b6a133802" -> null
+      - tags                               = {
+          - "Name" = "atlasbook-nat"
+        } -> null
+      - tags_all                           = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-nat"
+          - "Project"   = "atlasbook"
+        } -> null
+    }
+
+  # aws_route_table.app will be destroyed
+  - resource "aws_route_table" "app" {
+      - arn              = "arn:aws:ec2:us-east-1:212845664736:route-table/rtb-02dc8c72dc4078295" -> null
+      - id               = "rtb-02dc8c72dc4078295" -> null
+      - owner_id         = "212845664736" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - cidr_block                 = "0.0.0.0/0"
+              - nat_gateway_id             = "nat-0806af589b5344e0d"
+                # (11 unchanged attributes hidden)
+            },
+        ] -> null
+      - tags             = {
+          - "Name" = "atlasbook-rt-app"
+        } -> null
+      - tags_all         = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-rt-app"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id           = "vpc-0579fcff74cda8598" -> null
+    }
+
+  # aws_route_table.public will be destroyed
+  - resource "aws_route_table" "public" {
+      - arn              = "arn:aws:ec2:us-east-1:212845664736:route-table/rtb-09cdaa196133f9cd5" -> null
+      - id               = "rtb-09cdaa196133f9cd5" -> null
+      - owner_id         = "212845664736" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - cidr_block                 = "0.0.0.0/0"
+              - gateway_id                 = "igw-03efcb4e5227eb49a"
+                # (11 unchanged attributes hidden)
+            },
+        ] -> null
+      - tags             = {
+          - "Name" = "atlasbook-rt-public"
+        } -> null
+      - tags_all         = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-rt-public"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id           = "vpc-0579fcff74cda8598" -> null
+    }
+
+  # aws_route_table_association.app[0] will be destroyed
+  - resource "aws_route_table_association" "app" {
+      - id             = "rtbassoc-00369ca10a1fa41c1" -> null
+      - route_table_id = "rtb-02dc8c72dc4078295" -> null
+      - subnet_id      = "subnet-0442d5a85d2c491a6" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_route_table_association.app[1] will be destroyed
+  - resource "aws_route_table_association" "app" {
+      - id             = "rtbassoc-0057fe5614f08b8ad" -> null
+      - route_table_id = "rtb-02dc8c72dc4078295" -> null
+      - subnet_id      = "subnet-00ca410144591a79b" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_route_table_association.public[0] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0210f87d1bc9a46f0" -> null
+      - route_table_id = "rtb-09cdaa196133f9cd5" -> null
+      - subnet_id      = "subnet-05b9a718b6a133802" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_route_table_association.public[1] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-01fc68f845a20eb20" -> null
+      - route_table_id = "rtb-09cdaa196133f9cd5" -> null
+      - subnet_id      = "subnet-005849e1e210a53a8" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_s3_bucket.backups will be destroyed
+  - resource "aws_s3_bucket" "backups" {
+      - arn                 = "arn:aws:s3:::atlasbook-backups-ea1a2c05" -> null
+      - bucket              = "atlasbook-backups-ea1a2c05" -> null
+      - bucket_domain_name  = "atlasbook-backups-ea1a2c05.s3.amazonaws.com" -> null
+      - force_destroy       = true -> null
+      - id                  = "atlasbook-backups-ea1a2c05" -> null
+      - request_payer       = "BucketOwner" -> null
+      - tags                = {
+          - "Name" = "atlasbook-backups"
+        } -> null
+      - tags_all            = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-backups"
+          - "Project"   = "atlasbook"
+        } -> null
+        # (3 unchanged attributes hidden)
+
+      - grant {
+          - id          = "f40bc598292a0664acbd8f53038dffd045e5af9131c2a8b1782374e07659e364" -> null
+          - permissions = [
+              - "FULL_CONTROL",
+            ] -> null
+          - type        = "CanonicalUser" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - server_side_encryption_configuration {
+          - rule {
+              - bucket_key_enabled = false -> null
+
+              - apply_server_side_encryption_by_default {
+                  - sse_algorithm     = "AES256" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+        }
+
+      - versioning {
+          - enabled    = false -> null
+          - mfa_delete = false -> null
+        }
+    }
+
+  # aws_s3_bucket_lifecycle_configuration.backups will be destroyed
+  - resource "aws_s3_bucket_lifecycle_configuration" "backups" {
+      - bucket                                 = "atlasbook-backups-ea1a2c05" -> null
+      - id                                     = "atlasbook-backups-ea1a2c05" -> null
+      - transition_default_minimum_object_size = "all_storage_classes_128K" -> null
+        # (1 unchanged attribute hidden)
+
+      - rule {
+          - id     = "retention-versions" -> null
+          - status = "Enabled" -> null
+            # (1 unchanged attribute hidden)
+
+          - abort_incomplete_multipart_upload {
+              - days_after_initiation = 7 -> null
+            }
+
+          - filter {
+                # (1 unchanged attribute hidden)
+            }
+
+          - noncurrent_version_expiration {
+              - noncurrent_days = 90 -> null
+            }
+        }
+    }
+
+  # aws_s3_bucket_policy.backups will be destroyed
+  - resource "aws_s3_bucket_policy" "backups" {
+      - bucket = "atlasbook-backups-ea1a2c05" -> null
+      - id     = "atlasbook-backups-ea1a2c05" -> null
+      - policy = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "s3:*"
+                      - Condition = {
+                          - Bool = {
+                              - "aws:SecureTransport" = "false"
+                            }
+                        }
+                      - Effect    = "Deny"
+                      - Principal = "*"
+                      - Resource  = [
+                          - "arn:aws:s3:::atlasbook-backups-ea1a2c05",
+                          - "arn:aws:s3:::atlasbook-backups-ea1a2c05/*",
+                        ]
+                      - Sid       = "DenyNonTLS"
+                    },
+                  - {
+                      - Action    = "s3:*"
+                      - Condition = {
+                          - StringNotEquals = {
+                              - "aws:PrincipalAccount" = "212845664736"
+                            }
+                        }
+                      - Effect    = "Deny"
+                      - Principal = "*"
+                      - Resource  = [
+                          - "arn:aws:s3:::atlasbook-backups-ea1a2c05",
+                          - "arn:aws:s3:::atlasbook-backups-ea1a2c05/*",
+                        ]
+                      - Sid       = "DenyAccessOutsideAccount"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+    }
+
+  # aws_s3_bucket_public_access_block.backups will be destroyed
+  - resource "aws_s3_bucket_public_access_block" "backups" {
+      - block_public_acls       = true -> null
+      - block_public_policy     = true -> null
+      - bucket                  = "atlasbook-backups-ea1a2c05" -> null
+      - id                      = "atlasbook-backups-ea1a2c05" -> null
+      - ignore_public_acls      = true -> null
+      - restrict_public_buckets = true -> null
+    }
+
+  # aws_s3_bucket_server_side_encryption_configuration.backups will be destroyed
+  - resource "aws_s3_bucket_server_side_encryption_configuration" "backups" {
+      - bucket                = "atlasbook-backups-ea1a2c05" -> null
+      - id                    = "atlasbook-backups-ea1a2c05" -> null
+        # (1 unchanged attribute hidden)
+
+      - rule {
+          - apply_server_side_encryption_by_default {
+              - sse_algorithm     = "AES256" -> null
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_s3_bucket_versioning.backups will be destroyed
+  - resource "aws_s3_bucket_versioning" "backups" {
+      - bucket                = "atlasbook-backups-ea1a2c05" -> null
+      - id                    = "atlasbook-backups-ea1a2c05" -> null
+        # (1 unchanged attribute hidden)
+
+      - versioning_configuration {
+          - status     = "Enabled" -> null
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # aws_security_group.alb will be destroyed
+  - resource "aws_security_group" "alb" {
+      - arn                    = "arn:aws:ec2:us-east-1:212845664736:security-group/sg-05c30feafe25af89c" -> null
+      - description            = "ALB : HTTP depuis Internet, sortie vers les subnets applicatifs" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "10.10.11.0/24",
+                  - "10.10.12.0/24",
+                ]
+              - description      = "HTTP vers les instances applicatives"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+            },
+        ] -> null
+      - id                     = "sg-05c30feafe25af89c" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "HTTP depuis Internet"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+            },
+        ] -> null
+      - name                   = "atlasbook-alb-sg" -> null
+      - owner_id               = "212845664736" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "atlasbook-alb-sg"
+        } -> null
+      - tags_all               = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-alb-sg"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                 = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_security_group.app will be destroyed
+  - resource "aws_security_group" "app" {
+      - arn                    = "arn:aws:ec2:us-east-1:212845664736:security-group/sg-03c333eacd37a5ae4" -> null
+      - description            = "Instances applicatives : HTTP depuis l ALB, SSH depuis le bastion" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "HTTP pour apt"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+            },
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "HTTPS pour apt et S3"
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+            },
+          - {
+              - cidr_blocks      = [
+                  - "10.10.21.0/24",
+                  - "10.10.22.0/24",
+                ]
+              - description      = "PostgreSQL vers les subnets donnees"
+              - from_port        = 5432
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 5432
+            },
+        ] -> null
+      - id                     = "sg-03c333eacd37a5ae4" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = []
+              - description      = "HTTP depuis le SG de l ALB uniquement"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-05c30feafe25af89c",
+                ]
+              - self             = false
+              - to_port          = 80
+            },
+          - {
+              - cidr_blocks      = []
+              - description      = "SSH depuis le SG du bastion uniquement"
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-00ca15a5c40664909",
+                ]
+              - self             = false
+              - to_port          = 22
+            },
+        ] -> null
+      - name                   = "atlasbook-app-sg" -> null
+      - owner_id               = "212845664736" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "atlasbook-app-sg"
+        } -> null
+      - tags_all               = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-app-sg"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                 = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_security_group.bastion will be destroyed
+  - resource "aws_security_group" "bastion" {
+      - arn                    = "arn:aws:ec2:us-east-1:212845664736:security-group/sg-00ca15a5c40664909" -> null
+      - description            = "Bastion : SSH depuis l IP admin uniquement" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "10.10.11.0/24",
+                  - "10.10.12.0/24",
+                ]
+              - description      = "SSH vers les instances applicatives"
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+            },
+        ] -> null
+      - id                     = "sg-00ca15a5c40664909" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "<IP_ADMIN>/32",
+                ]
+              - description      = "SSH depuis l IP publique de l administrateur"
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+            },
+        ] -> null
+      - name                   = "atlasbook-bastion-sg" -> null
+      - owner_id               = "212845664736" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "atlasbook-bastion-sg"
+        } -> null
+      - tags_all               = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-bastion-sg"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                 = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_security_group.rds will be destroyed
+  - resource "aws_security_group" "rds" {
+      - arn                    = "arn:aws:ec2:us-east-1:212845664736:security-group/sg-049f0c41de0ce2e7b" -> null
+      - description            = "RDS : PostgreSQL depuis le SG applicatif uniquement" -> null
+      - egress                 = [] -> null
+      - id                     = "sg-049f0c41de0ce2e7b" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = []
+              - description      = "PostgreSQL depuis le SG applicatif uniquement"
+              - from_port        = 5432
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-03c333eacd37a5ae4",
+                ]
+              - self             = false
+              - to_port          = 5432
+            },
+        ] -> null
+      - name                   = "atlasbook-rds-sg" -> null
+      - owner_id               = "212845664736" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "atlasbook-rds-sg"
+        } -> null
+      - tags_all               = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-rds-sg"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_id                 = "vpc-0579fcff74cda8598" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_subnet.app[0] will be destroyed
+  - resource "aws_subnet" "app" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-0442d5a85d2c491a6" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az1" -> null
+      - cidr_block                                     = "10.10.11.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0442d5a85d2c491a6" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-app-1"
+          - "Tier" = "app"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-app-1"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "app"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.app[1] will be destroyed
+  - resource "aws_subnet" "app" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-00ca410144591a79b" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.10.12.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-00ca410144591a79b" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-app-2"
+          - "Tier" = "app"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-app-2"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "app"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.data[0] will be destroyed
+  - resource "aws_subnet" "data" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-0d4bcdd046dc38f9e" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az1" -> null
+      - cidr_block                                     = "10.10.21.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0d4bcdd046dc38f9e" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-data-1"
+          - "Tier" = "data"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-data-1"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "data"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.data[1] will be destroyed
+  - resource "aws_subnet" "data" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-009a798226a1e7325" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.10.22.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-009a798226a1e7325" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-data-2"
+          - "Tier" = "data"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-data-2"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "data"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.public[0] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-05b9a718b6a133802" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az1" -> null
+      - cidr_block                                     = "10.10.1.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-05b9a718b6a133802" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-public-1"
+          - "Tier" = "public"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-public-1"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "public"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.public[1] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:212845664736:subnet/subnet-005849e1e210a53a8" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.10.2.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-005849e1e210a53a8" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "212845664736" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "atlasbook-public-2"
+          - "Tier" = "public"
+        } -> null
+      - tags_all                                       = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-public-2"
+          - "Project"   = "atlasbook"
+          - "Tier"      = "public"
+        } -> null
+      - vpc_id                                         = "vpc-0579fcff74cda8598" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_vpc.main will be destroyed
+  - resource "aws_vpc" "main" {
+      - arn                                  = "arn:aws:ec2:us-east-1:212845664736:vpc/vpc-0579fcff74cda8598" -> null
+      - assign_generated_ipv6_cidr_block     = false -> null
+      - cidr_block                           = "10.10.0.0/16" -> null
+      - default_network_acl_id               = "acl-0c0decbb293b3332f" -> null
+      - default_route_table_id               = "rtb-03f9977ba66781925" -> null
+      - default_security_group_id            = "sg-06cfdb766c1ec1347" -> null
+      - dhcp_options_id                      = "dopt-03c145b381ab841f2" -> null
+      - enable_dns_hostnames                 = true -> null
+      - enable_dns_support                   = true -> null
+      - enable_network_address_usage_metrics = false -> null
+      - id                                   = "vpc-0579fcff74cda8598" -> null
+      - instance_tenancy                     = "default" -> null
+      - ipv6_netmask_length                  = 0 -> null
+      - main_route_table_id                  = "rtb-03f9977ba66781925" -> null
+      - owner_id                             = "212845664736" -> null
+      - tags                                 = {
+          - "Name" = "atlasbook-vpc"
+        } -> null
+      - tags_all                             = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-vpc"
+          - "Project"   = "atlasbook"
+        } -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_vpc_endpoint.s3 will be destroyed
+  - resource "aws_vpc_endpoint" "s3" {
+      - arn                        = "arn:aws:ec2:us-east-1:212845664736:vpc-endpoint/vpce-02d94ba886f4f480b" -> null
+      - cidr_blocks                = [
+          - "16.15.160.0/19",
+          - "16.182.0.0/16",
+          - "18.34.0.0/19",
+          - "52.216.0.0/15",
+          - "54.231.0.0/16",
+          - "3.5.0.0/19",
+          - "18.34.232.0/21",
+          - "16.15.192.0/18",
+          - "16.15.156.0/22",
+        ] -> null
+      - dns_entry                  = [] -> null
+      - id                         = "vpce-02d94ba886f4f480b" -> null
+      - ip_address_type            = "ipv4" -> null
+      - network_interface_ids      = [] -> null
+      - owner_id                   = "212845664736" -> null
+      - policy                     = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "*"
+                      - Effect    = "Allow"
+                      - Principal = "*"
+                      - Resource  = "*"
+                    },
+                ]
+              - Version   = "2008-10-17"
+            }
+        ) -> null
+      - prefix_list_id             = "pl-63a5400a" -> null
+      - private_dns_enabled        = false -> null
+      - requester_managed          = false -> null
+      - route_table_ids            = [
+          - "rtb-02dc8c72dc4078295",
+        ] -> null
+      - security_group_ids         = [] -> null
+      - service_name               = "com.amazonaws.us-east-1.s3" -> null
+      - service_region             = "us-east-1" -> null
+      - state                      = "available" -> null
+      - subnet_ids                 = [] -> null
+      - tags                       = {
+          - "Name" = "atlasbook-s3-endpoint"
+        } -> null
+      - tags_all                   = {
+          - "ManagedBy" = "terraform"
+          - "Name"      = "atlasbook-s3-endpoint"
+          - "Project"   = "atlasbook"
+        } -> null
+      - vpc_endpoint_type          = "Gateway" -> null
+      - vpc_id                     = "vpc-0579fcff74cda8598" -> null
+        # (2 unchanged attributes hidden)
+
+      - dns_options {
+          - dns_record_ip_type                             = "service-defined" -> null
+          - private_dns_only_for_inbound_resolver_endpoint = false -> null
+        }
+    }
+
+  # random_id.bucket_suffix will be destroyed
+  - resource "random_id" "bucket_suffix" {
+      - b64_std     = "6hosBQ==" -> null
+      - b64_url     = "6hosBQ" -> null
+      - byte_length = 4 -> null
+      - dec         = "3927583749" -> null
+      - hex         = "ea1a2c05" -> null
+      - id          = "6hosBQ" -> null
+    }
+
+Plan: 0 to add, 0 to change, 36 to destroy.
+
+Changes to Outputs:
+  - alb_dns_name      = "atlasbook-alb-1146779469.us-east-1.elb.amazonaws.com" -> null
+  - backup_bucket     = "atlasbook-backups-ea1a2c05" -> null
+  - bastion_public_ip = "3.222.205.217" -> null
+  - db_name           = "atlasbook" -> null
+  - db_username       = "atlas_admin" -> null
+  - rds_address       = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com" -> null
+  - rds_endpoint      = "atlasbook-db.c7zlaqtnives.us-east-1.rds.amazonaws.com:5432" -> null
+aws_instance.bastion: Destroying... [id=i-0fb676f27133ff255]
+aws_s3_bucket_lifecycle_configuration.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_server_side_encryption_configuration.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_vpc_endpoint.s3: Destroying... [id=vpce-02d94ba886f4f480b]
+aws_db_instance.main: Destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI]
+aws_route_table_association.public[0]: Destroying... [id=rtbassoc-0210f87d1bc9a46f0]
+aws_s3_bucket_policy.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_route_table_association.public[1]: Destroying... [id=rtbassoc-01fc68f845a20eb20]
+aws_lb_listener.http: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:listener/app/atlasbook-alb/9ced94707641168d/b234fc57607f0d9e]
+aws_autoscaling_group.app: Destroying... [id=atlasbook-asg]
+aws_s3_bucket_server_side_encryption_configuration.backups: Destruction complete after 0s
+aws_lb_listener.http: Destruction complete after 0s
+aws_lb.app: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:loadbalancer/app/atlasbook-alb/9ced94707641168d]
+aws_route_table_association.public[0]: Destruction complete after 0s
+aws_route_table_association.public[1]: Destruction complete after 0s
+aws_route_table.public: Destroying... [id=rtb-09cdaa196133f9cd5]
+aws_s3_bucket_policy.backups: Destruction complete after 0s
+aws_s3_bucket_public_access_block.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket_public_access_block.backups: Destruction complete after 1s
+aws_s3_bucket_lifecycle_configuration.backups: Destruction complete after 1s
+aws_s3_bucket_versioning.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_route_table.public: Destruction complete after 1s
+aws_s3_bucket_versioning.backups: Destruction complete after 0s
+aws_s3_bucket.backups: Destroying... [id=atlasbook-backups-ea1a2c05]
+aws_s3_bucket.backups: Destruction complete after 1s
+random_id.bucket_suffix: Destroying... [id=6hosBQ]
+random_id.bucket_suffix: Destruction complete after 0s
+aws_vpc_endpoint.s3: Destruction complete after 5s
+aws_instance.bastion: Still destroying... [id=i-0fb676f27133ff255, 00m10s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 00m10s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 00m10s elapsed]
+aws_lb.app: Still destroying... [id=arn:aws:elasticloadbalancing:us-east-1:...cer/app/atlasbook-alb/9ced94707641168d, 00m10s elapsed]
+aws_lb.app: Destruction complete after 17s
+aws_instance.bastion: Still destroying... [id=i-0fb676f27133ff255, 00m20s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 00m20s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 00m20s elapsed]
+aws_instance.bastion: Still destroying... [id=i-0fb676f27133ff255, 00m30s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 00m30s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 00m30s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 00m40s elapsed]
+aws_instance.bastion: Still destroying... [id=i-0fb676f27133ff255, 00m40s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 00m40s elapsed]
+aws_instance.bastion: Still destroying... [id=i-0fb676f27133ff255, 00m50s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 00m50s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 00m50s elapsed]
+aws_instance.bastion: Destruction complete after 51s
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m00s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 01m00s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m10s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 01m10s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m20s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 01m20s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m30s elapsed]
+aws_autoscaling_group.app: Still destroying... [id=atlasbook-asg, 01m30s elapsed]
+aws_autoscaling_group.app: Destruction complete after 1m31s
+aws_route_table_association.app[1]: Destroying... [id=rtbassoc-0057fe5614f08b8ad]
+aws_route_table_association.app[0]: Destroying... [id=rtbassoc-00369ca10a1fa41c1]
+aws_lb_target_group.app: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:212845664736:targetgroup/atlasbook-tg/c6d8f177682351b7]
+aws_launch_template.app: Destroying... [id=lt-07b4d3d01a3a77df6]
+aws_route_table_association.app[1]: Destruction complete after 1s
+aws_lb_target_group.app: Destruction complete after 1s
+aws_launch_template.app: Destruction complete after 1s
+aws_route_table_association.app[0]: Destruction complete after 1s
+aws_subnet.app[1]: Destroying... [id=subnet-00ca410144591a79b]
+aws_subnet.app[0]: Destroying... [id=subnet-0442d5a85d2c491a6]
+aws_route_table.app: Destroying... [id=rtb-02dc8c72dc4078295]
+aws_subnet.app[1]: Destruction complete after 1s
+aws_subnet.app[0]: Destruction complete after 1s
+aws_route_table.app: Destruction complete after 1s
+aws_nat_gateway.main: Destroying... [id=nat-0806af589b5344e0d]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m40s elapsed]
+aws_nat_gateway.main: Still destroying... [id=nat-0806af589b5344e0d, 00m10s elapsed]
+aws_db_instance.main: Still destroying... [id=db-SBW5P737LS2655VTKN5XCKPGXI, 01m50s elapsed]
+aws_db_instance.main: Destruction complete after 1m51s
+aws_db_subnet_group.main: Destroying... [id=atlasbook-db-subnets]
+aws_security_group.rds: Destroying... [id=sg-049f0c41de0ce2e7b]
+aws_db_subnet_group.main: Destruction complete after 1s
+aws_subnet.data[0]: Destroying... [id=subnet-0d4bcdd046dc38f9e]
+aws_subnet.data[1]: Destroying... [id=subnet-009a798226a1e7325]
+aws_security_group.rds: Destruction complete after 1s
+aws_security_group.app: Destroying... [id=sg-03c333eacd37a5ae4]
+aws_subnet.data[0]: Destruction complete after 1s
+aws_subnet.data[1]: Destruction complete after 1s
+aws_nat_gateway.main: Still destroying... [id=nat-0806af589b5344e0d, 00m20s elapsed]
+aws_security_group.app: Destruction complete after 1s
+aws_security_group.bastion: Destroying... [id=sg-00ca15a5c40664909]
+aws_security_group.alb: Destroying... [id=sg-05c30feafe25af89c]
+aws_security_group.bastion: Destruction complete after 1s
+aws_security_group.alb: Destruction complete after 1s
+aws_nat_gateway.main: Still destroying... [id=nat-0806af589b5344e0d, 00m30s elapsed]
+aws_nat_gateway.main: Still destroying... [id=nat-0806af589b5344e0d, 00m40s elapsed]
+aws_nat_gateway.main: Still destroying... [id=nat-0806af589b5344e0d, 00m50s elapsed]
+aws_nat_gateway.main: Destruction complete after 51s
+aws_subnet.public[0]: Destroying... [id=subnet-05b9a718b6a133802]
+aws_eip.nat: Destroying... [id=eipalloc-0350a697807f88cc9]
+aws_subnet.public[1]: Destroying... [id=subnet-005849e1e210a53a8]
+aws_eip.nat: Destruction complete after 1s
+aws_internet_gateway.main: Destroying... [id=igw-03efcb4e5227eb49a]
+aws_subnet.public[1]: Destruction complete after 1s
+aws_subnet.public[0]: Destruction complete after 1s
+aws_internet_gateway.main: Destruction complete after 1s
+aws_vpc.main: Destroying... [id=vpc-0579fcff74cda8598]
+aws_vpc.main: Destruction complete after 1s
+
+Destroy complete! Resources: 36 destroyed.
