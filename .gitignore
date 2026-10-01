@@ -54,5 +54,4 @@ rapport.html
 # en local. Pour les versionner aussi, supprimer ces quatre lignes.
 rapport.md
 build_rapport.sh
-captures/
 *.zip
